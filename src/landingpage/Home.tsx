@@ -6,6 +6,7 @@ import { motion,useScroll } from "framer-motion";
 import Books from "../assets/books.avif";
 import Footer from "../components/Footer";
 
+
 const Home = () => {
 
 
