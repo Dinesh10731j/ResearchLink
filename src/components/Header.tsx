@@ -30,7 +30,8 @@ const Header = () => {
         </section>
 
         <section>
-          <motion.button className="text-green-400 hover:border-b hover:border-b-green-400"
+       <Link to='/auth/signup'>
+       <motion.button className="text-green-400 hover:border-b hover:border-b-green-400"
           
           initial={{ opacity: 0, y: -80 }}
           animate={{opacity:1,y:0}}
@@ -38,6 +39,7 @@ const Header = () => {
           >
             Login for free
           </motion.button>
+       </Link>  
         </section>
       </section>
     </header>
