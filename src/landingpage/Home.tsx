@@ -143,13 +143,18 @@ transition={{type:'spring',stiffness:300}}
 </section>
 
 <section className="flex flex-col items-center justify-center mt-7 ">
-  <motion.h1 className="md:text-5xl text-2xl text-center px-20 md:px-0"
+  <motion.h1 className="md:text-5xl text-2xl text-center px-20 md:px-0 font-serif"
   initial={{ opacity: 0, y: -80 }}
   animate={{opacity:1,y:0}}
   transition={{type:'spring',stiffness:300}}
   
   >Advance your research and join a community of 25 million scientists</motion.h1>
-  <button className="md:py-4 md:-py-4 py-2 -py-2 px-12 md:px-16 bg-green-300 md:text-4xl text rounded-md mt-4 text-white ">Join for free</button>
+  <motion.button className="md:py-4 md:-py-4 py-2 -py-2 px-12 md:px-16 bg-green-300 md:text-4xl text rounded-md mt-4 text-white "
+  
+  initial={{ opacity: 0, y: -80 }}
+  animate={{opacity:1,y:0}}
+  transition={{type:'spring',stiffness:300}}
+  >Join for free</motion.button>
 </section>
     </>
   
