@@ -1,6 +1,7 @@
 import Header from "../components/Header"
 import Reseacher from "../assets/researcher.jpg";
 import ResearchMaterial from "../assets/rsearchmaterial.jpg";
+import { Topics } from "../utils/topics";
 import {motion} from "framer-motion"
 const Home = () => {
   return (
@@ -64,6 +65,50 @@ transition={{type:'spring',stiffness:300}}
      transition={{type:'spring',stiffness:300}}>Access over 160 million publication pages 
   and stay up to date with what's happening in your field.</motion.h1>
 
+  </section>
+</section>
+
+
+<section className="flex flex-col md:flex-row gap-4 px-5 justify-center items-center mt-12">
+  <section className="py-2 px-3">
+    <motion.h1 className=" text-3xl md:text-5xl font-serif font-medium  text-center"
+    
+    
+    initial={{ opacity: 0, y: -80 }}
+    animate={{opacity:1,y:0}}
+    transition={{type:'spring',stiffness:300}}
+    >Connect with your scientific community</motion.h1>
+    <motion.p  className="py-2 px-3 text-xl"
+     initial={{ opacity: 0, y: -80 }}
+     animate={{opacity:1,y:0}}
+     transition={{type:'spring',stiffness:300}}
+    
+    >Share your research, collaborate with your peers, and get the 
+      support you need to advance your career.</motion.p>
+  </section>
+
+  <section>
+  <motion.h1 className="text-center py-2 text-xl"
+  
+  initial={{ opacity: 0, y: -80 }}
+  animate={{opacity:1,y:0}}
+  transition={{type:'spring',stiffness:300}}
+  >Visit Topic Pages</motion.h1>
+   
+<section className="flex flex-wrap gap-4">
+
+
+  {
+    Topics?.map(topics=>(
+      <motion.button className="border border-green-300 -py-2 py-2 px-5 text-sm  md:-py-3 md:py-3 md:px-10 text-green-300 rounded-full
+       md:text-xl hover:bg-green-100"  initial={{ opacity: 0, y: -80 }}
+       animate={{opacity:1,y:0}}
+       transition={{type:'spring',stiffness:300}}>{topics.topic}</motion.button>
+    ))
+  }
+  
+
+</section>
   </section>
 </section>
     </>
