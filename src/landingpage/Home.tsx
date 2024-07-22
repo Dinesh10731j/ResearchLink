@@ -1,13 +1,25 @@
 import Header from "../components/Header";
 import Reseacher from "../assets/researcher.jpg";
 import ResearchMaterial from "../assets/rsearchmaterial.jpg";
-import { Topics } from "../utils/topics";
-import { motion } from "framer-motion";
+import { Topics} from "../utils/topics";
+import { motion,useScroll } from "framer-motion";
 import Books from "../assets/books.avif";
+import Footer from "../components/Footer";
+
 const Home = () => {
+
+
+  const {scrollYProgress} = useScroll();
   return (
     <>
       <Header />
+
+      <motion.section   style={{ scaleX: scrollYProgress }}
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        className="h-1 bg-green-500" >
+     
+      </motion.section>
 
       <section className="flex flex-col  md:gap-7 justify-center items-center py-3 px-12 md:flex-row">
         <section className="bg-slate-200 md:py-36 md:px-12 py-7 px-4">
@@ -173,6 +185,9 @@ const Home = () => {
           Join for free
         </motion.button>
       </section>
+      <Footer/>
+
+      
     </>
   );
 };
