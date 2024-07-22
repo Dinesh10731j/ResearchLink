@@ -2,6 +2,7 @@
 import { useForm } from 'react-hook-form';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import {motion} from "framer-motion"
 
 interface LoginData {
   email: string;
@@ -13,14 +14,19 @@ const Login = () => {
 
   const onSubmit = (data: LoginData) => {
     console.log(data);
-    // Implement your login logic here
+   
   };
 
   return (
     <>
       <Header />
 
-      <section className="flex items-center justify-center min-h-screen bg-gray-100">
+      <motion.section className="flex items-center justify-center min-h-screen"
+      
+      initial={{ opacity: 0, y: -80 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", stiffness: 300 }}
+      >
         <div className="max-w-md w-full p-6 bg-white rounded-md shadow-md">
           <h2 className="text-2xl font-bold mb-6">Login</h2>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -65,7 +71,7 @@ const Login = () => {
           </form>
         </div>
        
-      </section>
+      </motion.section>
 
       <Footer/>
     </>
