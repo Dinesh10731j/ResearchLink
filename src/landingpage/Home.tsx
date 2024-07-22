@@ -2,7 +2,8 @@ import Header from "../components/Header"
 import Reseacher from "../assets/researcher.jpg";
 import ResearchMaterial from "../assets/rsearchmaterial.jpg";
 import { Topics } from "../utils/topics";
-import {motion} from "framer-motion"
+import {motion} from "framer-motion";
+import Books from "../assets/books.avif"
 const Home = () => {
   return (
 
@@ -38,8 +39,8 @@ const Home = () => {
 </section>
 
 
-<section className="flex  flex-col gap-3 md:flex-row justify-center items-center ">
-  <motion.section className="h-96 w-96 bg-slate-200 rounded-full shadow-md"
+<section className="flex  flex-col gap-3 md:flex-row justify-center items-center px-3  ">
+  <motion.section className="h-96 w-96 bg-slate-200 rounded-full shadow-md "
    initial={{ opacity: 0, y: -80 }}
    animate={{opacity:1,y:0}}
    transition={{type:'spring',stiffness:300}}
@@ -110,6 +111,50 @@ transition={{type:'spring',stiffness:300}}
 
 </section>
   </section>
+</section>
+
+
+<section className="flex flex-col md:flex-row gap-4 mt-7 justify-center items-center ">
+
+  <section className="px-3">
+    <motion.img src={Books} className="h-96 w-96 rounded-full shadow-md"
+    
+    initial={{ opacity: 0, y: -80 }}
+  animate={{opacity:1,y:0}}
+  transition={{type:'spring',stiffness:300}}
+    />
+  </section>
+
+  <section className="px-20 ">
+    <motion.h1 className=" text-3xl md:text-5xl font-serif text-center"
+    
+    initial={{ opacity: 0, y: -80 }}
+  animate={{opacity:1,y:0}}
+  transition={{type:'spring',stiffness:300}}
+    >Measure your impact</motion.h1>
+    <motion.p className=" text-xl md:text-2xl" 
+    
+    initial={{ opacity: 0, y: -80 }}
+  animate={{opacity:1,y:0}}
+  transition={{type:'spring',stiffness:300}}
+    >Get in-depth stats on who's been reading your work and keep track of your citations.</motion.p>
+
+  </section>
+</section>
+
+<section className="flex flex-col items-center justify-center mt-7 ">
+  <motion.h1 className="md:text-5xl text-2xl text-center px-20 md:px-0 font-serif"
+  initial={{ opacity: 0, y: -80 }}
+  animate={{opacity:1,y:0}}
+  transition={{type:'spring',stiffness:300}}
+  
+  >Advance your research and join a community of 25 million scientists</motion.h1>
+  <motion.button className="md:py-4 md:-py-4 py-2 -py-2 px-12 md:px-16 bg-green-300 md:text-4xl text rounded-md mt-4 text-white "
+  
+  initial={{ opacity: 0, y: -80 }}
+  animate={{opacity:1,y:0}}
+  transition={{type:'spring',stiffness:300}}
+  >Join for free</motion.button>
 </section>
     </>
   
