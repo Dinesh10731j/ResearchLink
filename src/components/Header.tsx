@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <header className="flex justify-between items-center shadow-xl py-3 md:py-5 px-20 md:px-36 font-serif ">
@@ -15,7 +16,9 @@ const Header = () => {
 
       <section className="flex gap-3">
         <section>
-          <motion.button className="hover:border-b hover:border-b-gray-500"
+        <Link to='/auth/login'>
+        
+        <motion.button className="hover:border-b hover:border-b-gray-500"
           
           initial={{ opacity: 0, y: -80 }}
           animate={{opacity:1,y:0}}
@@ -23,6 +26,7 @@ const Header = () => {
           >
             Login
           </motion.button>
+        </Link>  
         </section>
 
         <section>
