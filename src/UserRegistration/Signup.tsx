@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { UseUserSignup } from "../hooks/Usesignup";
+import {Toaster} from "react-hot-toast";
+import  {CircularProgress} from "@mui/material"
 
 interface Signupdatatypes {
   name: string;
@@ -10,6 +13,7 @@ interface Signupdatatypes {
 }
 
 const Signup = () => {
+  const mutation = UseUserSignup();
   const {
     register,
     handleSubmit,
@@ -17,8 +21,7 @@ const Signup = () => {
   } = useForm<Signupdatatypes>();
 
   const onSubmit = (data: Signupdatatypes) => {
-   
-    console.log(data);
+ mutation.mutate(data);
   };
 
 
@@ -109,9 +112,13 @@ const Signup = () => {
           type="submit"
           className="w-full bg-green-300 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-200"
         >
-          Sign Up
+          {mutation.isPending?<CircularProgress size={20} color="success"/>:'Sign Up'}
         </button>
       </form>
+
+    
+          <Toaster position="top-center"/>
+       
     </div>
     <Footer/>
     </>
