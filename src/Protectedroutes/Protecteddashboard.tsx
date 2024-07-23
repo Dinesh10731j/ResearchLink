@@ -1,20 +1,28 @@
-import { Outlet,Navigate } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import Cookies from "js-cookie";
+
+
 const Protecteddashboard = () => {
-const token = Cookies.get("token")
+  const token = Cookies.get("tokenn");
+
+  if (!token) {
+   
+   
+
+      return <Navigate to="/auth/login" />;
+
+   
+  }
+
   return (
-   <>
-   
-   <section>
+    <>
+      <section>
+        <Outlet />
+      </section>
 
-{
-    token?<Outlet/>:<Navigate to='/auth/login'/>
-}
+      
+    </>
+  );
+};
 
-   </section>
-   </>
-   
-  )
-}
-
-export default Protecteddashboard
+export default Protecteddashboard;
