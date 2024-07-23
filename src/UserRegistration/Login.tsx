@@ -4,7 +4,11 @@ import { useForm } from 'react-hook-form';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { motion } from 'framer-motion';
-import LoginImage from '../assets/login.jpg'; // Adjust the path to your image
+import LoginImage from '../assets/login.jpg'; 
+import { Link } from 'react-router-dom';
+import { Toaster } from "react-hot-toast";
+import { UseUserLogin } from '../hooks/Uselogin';
+import { CircularProgress } from '@mui/material';
 
 interface LoginData {
   email: string;
@@ -13,10 +17,11 @@ interface LoginData {
 
 const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<LoginData>();
+  const mutation = UseUserLogin();
 
   const onSubmit = (data: LoginData) => {
-    console.log(data);
-    // You can add logic here to handle form submission, e.g., API calls
+   mutation.mutate(data);
+ 
   };
 
   return (
@@ -80,17 +85,23 @@ const Login = () => {
                 type="submit"
                 className="w-full bg-green-300 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-200"
               >
-                Login
+            {mutation.isPending?(<CircularProgress size={20}/>):(
+              'Login'
+            )}
               </button>
 
               {/* Signup Button */}
-              <button
+          <Link to="/auth/signup">
+          <button
                 type="button"
-                className="w-full bg-green-700 text-white py-2 px-4 rounded-md hover:bg-green-900 transition duration-200"
+                className="w-full bg-green-700 text-white py-2 px-4 rounded-md hover:bg-green-900 transition duration-200 mt-6"
               >
                 Signup
               </button>
+          </Link>  
             </form>
+
+            <Toaster position='top-center'/>
           </section>
         </div>
       </motion.section>
