@@ -1,11 +1,29 @@
-import { useForm } from "react-hook-form";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import { UseUserSignup } from "../hooks/Usesignup";
-import {Toaster} from "react-hot-toast";
-import  {CircularProgress} from "@mui/material"
 
-interface Signupdatatypes {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import { useForm } from 'react-hook-form';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import { UseUserSignup } from '../hooks/Usesignup';
+import { Toaster } from 'react-hot-toast';
+import { CircularProgress } from '@mui/material';
+import SignupImage from '../assets/signup.avif'; // Adjust the path to your image
+
+interface SignupData {
   name: string;
   email: string;
   password: string;
@@ -18,112 +36,117 @@ const Signup = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Signupdatatypes>();
+  } = useForm<SignupData>();
 
-  const onSubmit = (data: Signupdatatypes) => {
- mutation.mutate(data);
+  const onSubmit = (data: SignupData) => {
+    mutation.mutate(data);
   };
 
-
   return (
-
     <>
-    <Header/>
-    
-    <div className="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-md">
-      <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <div>
-          <label htmlFor="name" className="block mb-1">
-            Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            {...register("name", {
-              required: "Name is required",
-            })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-          />
-          {errors.name && <p className="text-red-500">{errors.name.message}</p>}
-        </div>
+      <Header />
 
-        <div>
-          <label htmlFor="email" className="block mb-1">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            {...register("email", {
-              required: "Email is required",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Invalid email address",
-              },
-            })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-          />
-          {errors.email && (
-            <p className="text-red-500">{errors.email.message}</p>
-          )}
-        </div>
+      <div className="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-md">
+        {/* Image Section */}
+        <section className="mb-4">
+          <img src={SignupImage} alt="Signup" className="w-full rounded-md shadow-md" />
+        </section>
 
-        <div>
-          <label htmlFor="password" className="block mb-1">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            {...register("password", {
-              required: "Password is required",
-              minLength: {
-                value: 6,
-                message: "Password must have at least 6 characters",
-              },
-            })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-          />
-          {errors.password && (
-            <p className="text-red-500">{errors.password.message}</p>
-          )}
-        </div>
+        {/* Form Section */}
+        <section>
+          <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            {/* Name Input */}
+            <div>
+              <label htmlFor="name" className="block mb-1">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                {...register('name', {
+                  required: 'Name is required',
+                })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+              />
+              {errors.name && <p className="text-red-500">{errors.name.message}</p>}
+            </div>
 
-        <div>
-          <label htmlFor="affiliation" className="block mb-1">
-            Affiliation
-          </label>
-          <input
-            type="text"
-            id="affiliation"
-            {...register("affiliation",{
-                required:'Affiliation is required'
-            })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-          />
+            {/* Email Input */}
+            <div>
+              <label htmlFor="email" className="block mb-1">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                {...register('email', {
+                  required: 'Email is required',
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: 'Invalid email address',
+                  },
+                })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+              />
+              {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+            </div>
 
-{errors.affiliation && (
-            <p className="text-red-500">{errors.affiliation.message}</p>
-          )}
-        </div>
+            {/* Password Input */}
+            <div>
+              <label htmlFor="password" className="block mb-1">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                {...register('password', {
+                  required: 'Password is required',
+                  minLength: {
+                    value: 6,
+                    message: 'Password must have at least 6 characters',
+                  },
+                })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+              />
+              {errors.password && <p className="text-red-500">{errors.password.message}</p>}
+            </div>
 
-        <button
-          type="submit"
-          className="w-full bg-green-300 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-200"
-        >
-          {mutation.isPending?<CircularProgress size={20} color="success"/>:'Sign Up'}
-        </button>
-      </form>
+            {/* Affiliation Input */}
+            <div>
+              <label htmlFor="affiliation" className="block mb-1">
+                Affiliation
+              </label>
+              <input
+                type="text"
+                id="affiliation"
+                {...register('affiliation', {
+                  required: 'Affiliation is required',
+                })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+              />
+              {errors.affiliation && <p className="text-red-500">{errors.affiliation.message}</p>}
+            </div>
 
-    
-          <Toaster position="top-center"/>
-       
-    </div>
-    <Footer/>
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="w-full bg-green-300 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-200"
+            >
+              {mutation.isPending ? <CircularProgress size={20} color="success" /> : 'Sign Up'}
+            </button>
+          </form>
+
+          {/* Toast Notifications */}
+          <Toaster position="top-center" />
+        </section>
+      </div>
+
+      <Footer />
     </>
-    
   );
 };
 
 export default Signup;
+
+

@@ -5,6 +5,8 @@ import { axiosInstance } from "../Endpoints/axiosInstance";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
+
+
 interface SignupData{
     name:string,
     email:string,
