@@ -3,6 +3,7 @@ import { axiosInstance } from "../Endpoints/axiosInstance";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 
 interface Logindata {
@@ -12,8 +13,9 @@ interface Logindata {
 const { UserLogin } = endpoints;
 const userLogin = async (logindata: Logindata) => {
   const response = await axiosInstance.post(UserLogin, logindata);
+  console.log('This is LoginResponse',response.data)
 
-  return response.data.data;
+  return response.data;
 };
 
 export const UseUserLogin = () => {
@@ -22,10 +24,10 @@ export const UseUserLogin = () => {
   const mutation = useMutation({
     mutationKey: ["userlogin"],
     mutationFn: userLogin,
-    onSuccess: () => {
+    onSuccess: (data) => {
 
         toast.success("Login successful!");
-
+Cookies.set("token",data?.token)
 
         setTimeout(()=>{
 navigate("/dashboard");

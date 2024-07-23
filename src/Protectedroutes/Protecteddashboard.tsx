@@ -1,17 +1,14 @@
 import { Outlet,Navigate } from "react-router-dom";
 import Cookies from "js-cookie";
 const Protecteddashboard = () => {
-const token  = Cookies.get("token");
-
-console.log("The coookie  is ",token);
-console.log(`The cookie is ${token} here is the cookie `)
+const token = Cookies.get("token")
   return (
    <>
    
    <section>
 
 {
-    token?<Outlet/>:<Navigate to='/login'/>
+    token?<Outlet/>:<Navigate to='/auth/login'/>
 }
 
    </section>
