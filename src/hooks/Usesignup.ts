@@ -1,7 +1,7 @@
 import {useMutation} from "@tanstack/react-query";
 import { endpoints } from "../Endpoints/endpoints";
 const {UserSignup} = endpoints;
-import { axiosInstance } from "../Endpoints/axiosInstance";
+import axiosInstance from "../Endpoints/axiosInstance";
 import toast from "react-hot-toast";
 
 import { useNavigate } from "react-router-dom";

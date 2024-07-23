@@ -1,43 +1,46 @@
 import { endpoints } from "../Endpoints/endpoints";
-import { axiosInstance } from "../Endpoints/axiosInstance";
+import axiosInstance from "../Endpoints/axiosInstance";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-
+import Cookies from "js-cookie";
 
 interface Logindata {
   email: string;
   password: string;
 }
-const { UserLogin } = endpoints;
-const userLogin = async (logindata: Logindata) => {
-  const response = await axiosInstance.post(UserLogin, logindata);
 
-  return response.data.data;
+const { UserLogin } = endpoints;
+
+const userLogin = async (logindata: Logindata) => {
+  try {
+   
+    const response = await axiosInstance.post(UserLogin, logindata);
+   
+    return response.data;
+  } catch (error) {
+    throw new Error("Login failed");
+  }
 };
 
 export const UseUserLogin = () => {
-    const navigate =useNavigate();
-    
+  const navigate = useNavigate();
+
   const mutation = useMutation({
     mutationKey: ["userlogin"],
     mutationFn: userLogin,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      toast.success("Login successful!");
 
-        toast.success("Login successful!");
-
-
-        setTimeout(()=>{
-navigate("/dashboard");
-        },2000)
-
-
+      Cookies.set("token",data?.token);
+     
+    
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
     },
-
     onError: () => {
-toast.error('Invalid credentials')
-
-
+      toast.error( "Invalid credentials");
     },
   });
 
