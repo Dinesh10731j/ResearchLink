@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 
 const Protecteddashboard = () => {
-  const token = Cookies.get("tokenn");
+  const token = Cookies.get("token");
 
   if (!token) {
    
