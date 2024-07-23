@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BaseUrl = 'http://localhost:7000'
+const BaseUrl = 'https://researchlink-api.onrender.com'
 
 export const axiosInstance = axios.create({
     baseURL:BaseUrl
