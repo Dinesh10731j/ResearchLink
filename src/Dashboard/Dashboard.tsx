@@ -26,12 +26,17 @@ const Dashboard = () => {
         <div className="flex flex-col md:flex-row">
           {/* Side Navigation */}
           <aside
-            className={`h-screen pt-10 w-64 bg-[#2f2f2f] fixed top-0 left-0 transition-transform duration-300 md:relative md:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:w-72`}
+            className={`h-screen pt-10 w-58 md:w-64 bg-[#2f2f2f] fixed top-0 left-0 transition-transform duration-300 md:relative md:translate-x-0 ${
+              isOpen ? "-translate-x-full" : "translate-x-0"
+            }`}
           >
             <nav>
               <ul>
                 {NavLinks.map((link) => (
-                  <li key={link.title} className="flex items-center p-4 hover:bg-black rounded-md transition-all">
+                  <li
+                    key={link.title}
+                    className="flex items-center p-4 hover:bg-black rounded-md transition-all"
+                  >
                     <link.icon className="text-white mr-4" />
                     <Link to={link.path} className="text-white">
                       {link.title}
@@ -41,9 +46,9 @@ const Dashboard = () => {
               </ul>
             </nav>
           </aside>
-          
+
           {/* Main Content */}
-          <main className={`flex-1 p-4 transition-all duration-300 ${isOpen ? 'md:ml-64' : ''}`}>
+          <main className={`flex-1 p-4 transition-all duration-300 `}>
             <Outlet />
           </main>
         </div>
