@@ -31,8 +31,8 @@ export const UseUserLogin = () => {
     mutationFn: userLogin,
     onSuccess: (data) => {
       toast.success("Login successful!");
-
-      Cookies.set("token",data?.token);
+  
+      Cookies.set("token",data?.token,{expires:1});
      
     
       setTimeout(() => {

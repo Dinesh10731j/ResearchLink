@@ -5,6 +5,7 @@ import { UseUserSignup } from "../hooks/Usesignup";
 import { Toaster } from "react-hot-toast";
 import { CircularProgress } from "@mui/material";
 import SignupImage from "../assets/signup.avif";
+import {motion} from "framer-motion"
 
 interface SignupData {
   name: string;
@@ -34,9 +35,25 @@ const Signup = () => {
       <Header />
 
       <div className="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-md">
-        <h2 className="text-2xl font-bold mb-4 text-center">Sign Up</h2>
-        <img src={SignupImage} alt="Signup form" className="w-full rounded-md shadow-md mb-4" />
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <motion.h2 className="text-2xl font-bold mb-4 text-center font-serif"  
+        
+        initial={{ opacity: 0, y: -80 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: "spring", stiffness: 300 }}
+        >Sign Up</motion.h2>
+        <motion.img src={SignupImage} alt="Signup form" className="w-full rounded-md shadow-md mb-4"
+        
+        initial={{ opacity: 0, y: -80 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: "spring", stiffness: 300 }}
+        />
+        <motion.form onSubmit={handleSubmit(onSubmit)} className="space-y-4"
+        
+        
+        initial={{ opacity: 0, y: -80 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: "spring", stiffness: 300 }}
+        >
           <div>
             <label htmlFor="name" className="block mb-1">
               Name
@@ -121,7 +138,7 @@ const Signup = () => {
               "Sign Up"
             )}
           </button>
-        </form>
+        </motion.form>
 
         <Toaster position="top-center" />
       </div>
