@@ -5,6 +5,7 @@ import { Topics} from "../utils/topics";
 import { motion,useScroll } from "framer-motion";
 import Books from "../assets/books.avif";
 import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
 
 
 const Home = () => {
@@ -33,7 +34,9 @@ const Home = () => {
             Discover scientific knowledge and stay connected to the world of
             science
           </motion.h1>
-          <motion.button
+        <Link to={'/auth/signup'}>
+        
+        <motion.button
             className="md:py-5 px-12 py-3 bg-green-300 text-white rounded-md text-xl mt-12"
             initial={{ opacity: 0, y: -80 }}
             animate={{ opacity: 1, y: 0 }}
@@ -41,6 +44,7 @@ const Home = () => {
           >
             Join for free
           </motion.button>
+        </Link>
         </section>
         <section className="py-36 px-7">
           <motion.img
@@ -177,7 +181,9 @@ const Home = () => {
         >
           Advance your research and join a community of 25 million scientists
         </motion.h1>
-        <motion.button
+     <Link to="/auth/signup">
+     
+     <motion.button
           className="md:py-4 md:-py-4 py-2 -py-2 px-12 md:px-16 bg-green-300 md:text-4xl text rounded-md mt-4 text-white "
           initial={{ opacity: 0, y: -80 }}
           animate={{ opacity: 1, y: 0 }}
@@ -185,6 +191,7 @@ const Home = () => {
         >
           Join for free
         </motion.button>
+     </Link>   
       </section>
       <Footer/>
 
