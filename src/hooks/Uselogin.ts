@@ -33,6 +33,7 @@ export const UseUserLogin = () => {
       toast.success("Login successful!");
   
       Cookies.set("token",data?.token,{expires:1});
+      Cookies.set("userid",data.data?._id);
      
     
       setTimeout(() => {
