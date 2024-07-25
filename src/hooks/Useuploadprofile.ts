@@ -4,7 +4,6 @@ const {Uploadimage} = endpoints
 import {useMutation} from "@tanstack/react-query";
 import {toast} from "react-hot-toast"
 import Cookies from "js-cookie";
-
 interface cloudinaryUrlType{
     cloudinaryUrl:string,
 }
@@ -21,8 +20,7 @@ export const UseUploaduserprofile = ()=>{
     const mutation = useMutation({mutationKey:['imageupload'],mutationFn:Uploaduserprofile,
         onSuccess:(data)=>{
             Cookies.set('userprofile',data?._id);
-            console.log('This is profile_id',data?._id)
-
+            
         toast.success('Profile uploaded successfully!')
     },
 onError:()=>{
