@@ -115,14 +115,33 @@ const Dashboard = () => {
                   </button>
                 </form>
               </section>
+{
+  isLoading?(
+    <CircularProgress size={20} color='primary'/>
+  ):(
+<h1 className="text-center text-white text-2xl">
+    {`Hi,${user.data?.name}`}
+         </h1>
+  )
+    
+}
+          
 
-              <h1 className="text-center text-white text-2xl">
-         {`Hi,${user.data?.name}`}
-              </h1>
+        
+        {
 
-              <h1 className="text-center text-white text-2xl">
-         {`${user.data?.affiliation}`}
-              </h1>
+          isLoading?(
+            <CircularProgress size={20} color="primary"/>
+          ):(
+            <h1 className="text-center text-white text-2xl">
+            {`${user.data?.affiliation}`}
+                 </h1>
+
+          )
+          
+
+        }
+            
 
               <button
                 className="bg-red-500 text-white py-2 px-10 ml-4 rounded-lg"
