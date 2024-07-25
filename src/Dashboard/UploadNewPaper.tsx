@@ -3,6 +3,7 @@ import { UseUploadPaper } from '../hooks/Useuploadpaper';
 import { uploadToCloudinary } from '../hooks/Useuploadtocloudinary'; // Adjust the path
 import {toast} from "react-hot-toast";
 import { Toaster } from 'react-hot-toast';
+import {Upload} from "lucide-react"
 
 interface FileUploadData {
   title: string;
@@ -76,9 +77,9 @@ const UploadNewPaper = () => {
         <button
           type="submit"
           disabled={mutation.isPending}
-          className={`px-4 py-2 text-white rounded-md ${mutation.isPending ? 'bg-gray-500' : 'bg-blue-600'} hover:bg-blue-700`}
+          className={`px-7 py-2 text-white rounded-md ${mutation.isPending ? 'bg-gray-500' : 'bg-blue-600'} hover:bg-blue-700`}
         >
-          {mutation.isPending ? 'Uploading...' : 'Upload'}
+          {mutation.isPending ? 'Uploading...' : <Upload/>}
         </button>
       </form>
       <Toaster/>
