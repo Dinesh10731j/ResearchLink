@@ -22,7 +22,7 @@ const Dashboard = () => {
   const mutation = UseUploaduserprofile();
   const { register, handleSubmit } = useForm<imageUpload>();
   const navigate = useNavigate();
-  const { data, isLoading, isError } = UseGetProfile();
+  const { data, isLoading, isError} = UseGetProfile();
   const user = UserUserdetails();
 
   console.log(user?.data);
@@ -100,15 +100,28 @@ const Dashboard = () => {
 
               <section className="flex">
                 <form onSubmit={handleSubmit(onsubmit)} className="flex flex-col items-center justify-center">
-                  <input type="file" {...register("profile")} className="ml-12 rounded-md" placeholder="Upload profile" />
-                  <button type="submit">
-                    <Upload color="blue"/>
+                <label
+                    htmlFor="profile-upload"
+                    className="bg-blue-600 text-white py-1 px-4 rounded-md cursor-pointer hover:bg-blue-700 shadow-md"
+                    
+                  >Upload profile</label>
+                  <input type="file" {...register("profile")} className="ml-12 rounded-md text-white hidden"  id="profile-upload"
+                
+                 
+                  
+                  />
+                  <button type="submit" className="mt-7 py-2  px-7 bg-blue-500 rounded-md text-white">
+                    <Upload color="white"/>
                   </button>
                 </form>
               </section>
 
               <h1 className="text-center text-white text-2xl">
          {`Hi,${user.data?.name}`}
+              </h1>
+
+              <h1 className="text-center text-white text-2xl">
+         {`${user.data?.affiliation}`}
               </h1>
 
               <button

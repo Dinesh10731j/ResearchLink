@@ -64,12 +64,12 @@ const UploadNewPaper = () => {
         </div>
 
         <div>
-          <label htmlFor="file" className="block text-sm font-medium text-gray-700">Upload File</label>
+          <label htmlFor="file" className="block text-sm font-medium text-white bg-blue-500 py-1 w-24 text-center cursor-pointer shadow-md rounded-md"  >Upload File</label>
           <input
             type="file"
             id="file"
             {...register('file', { required: 'File is required' })}
-            className="mt-1 block w-full text-gray-500"
+            className="mt-1  w-full text-gray-500 hidden"
           />
           {errors.file && <p className="text-red-500 text-sm mt-1">{errors.file.message}</p>}
         </div>
