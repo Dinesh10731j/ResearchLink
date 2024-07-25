@@ -133,7 +133,7 @@ const Dashboard = () => {
           isLoading?(
             <CircularProgress size={20} color="primary"/>
           ):(
-            <h1 className="text-center text-white text-2xl">
+              <h1 className="text-center text-white text-2xl">
             {`${user.data?.affiliation}`}
                  </h1>
 

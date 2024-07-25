@@ -1,5 +1,6 @@
 import { UseResearchPaper } from "../hooks/Usegetresearchpaper";
 import { motion } from "framer-motion";
+import { UseGetProfile } from "../hooks/Usegetprofile";
 
 interface ResearchPaperType {
   title: string;
@@ -10,6 +11,7 @@ interface ResearchPaperType {
 
 const Feeds = () => {
   const Researchpapers = UseResearchPaper();
+  const Profile = UseGetProfile()
   console.log(Researchpapers.data);
 
   const containerVariants = {
@@ -36,7 +38,7 @@ const Feeds = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="bg-white shadow-md p-6 rounded-lg hover:bg-gray-100 transition mt-20 md:mt-0"
+            className="bg-white -z-10 shadow-md p-6 rounded-lg hover:bg-gray-100 transition mt-20 md:mt-0 relative"
           >
             <motion.h2 variants={itemVariants} className="text-2xl font-bold mb-2">
               {researchpaper.title}
@@ -47,6 +49,16 @@ const Feeds = () => {
             <motion.div variants={itemVariants} className="text-sm text-gray-500">
               Published Date: {new Date(researchpaper.publishedDate).toLocaleDateString()}
             </motion.div>
+
+            <motion.div
+            className="absolute bottom-2 right-2 h-12 w-12 sm:h-16 sm:w-16 border-2 border-gray-200 rounded-full overflow-hidden"
+          >
+            <img
+              src={Profile?.data?.profile || <img src="https://avatar.iran.liara.run/public" className="h-20 w-20 rounded-full"/>}
+              alt="Profile"
+              className="h-full w-full object-cover"
+            />
+          </motion.div>
             <motion.a
               href={researchpaper.researchpaper}
               variants={itemVariants}
