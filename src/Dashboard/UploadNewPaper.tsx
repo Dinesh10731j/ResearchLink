@@ -3,7 +3,8 @@ import { UseUploadPaper } from '../hooks/Useuploadpaper';
 import { uploadToCloudinary } from '../hooks/Useuploadtocloudinary'; // Adjust the path
 import {toast} from "react-hot-toast";
 import { Toaster } from 'react-hot-toast';
-import {Upload} from "lucide-react"
+import {Upload} from "lucide-react";
+import Cookies from "js-cookie"
 
 interface FileUploadData {
   title: string;
@@ -17,6 +18,7 @@ const UploadNewPaper = () => {
 
   const onSubmit = async (data: FileUploadData) => {
     try {
+      const userId = Cookies.get("userid")
       const file = data.file[0];
       if (file) {
         
@@ -26,6 +28,7 @@ const UploadNewPaper = () => {
           title: data.title,
           description: data.description,
         file:imageUrl, 
+        userId:userId
         };
 
         

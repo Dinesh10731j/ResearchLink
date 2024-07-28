@@ -5,18 +5,22 @@ import { UseUserSignup } from "../hooks/Usesignup";
 import { Toaster } from "react-hot-toast";
 import { CircularProgress } from "@mui/material";
 import SignupImage from "../assets/signup.avif";
-import {motion} from "framer-motion"
+import { motion } from "framer-motion";
+import { Usecloudinaryimageupload } from "../hooks/Useuploadprofilecloudinary";
+import { toast } from "react-hot-toast";
 
 interface SignupData {
   name: string;
   email: string;
   password: string;
   affiliation: string;
+  profile: string;
+  profilePicture: FileList;
+  researchField: string;
 }
 
 const Signup = () => {
   const mutation = UseUserSignup();
-
 
   const {
     register,
@@ -24,35 +28,56 @@ const Signup = () => {
     formState: { errors },
   } = useForm<SignupData>();
 
-  const onSubmit = (data: SignupData) => {
-    mutation.mutate(data);
-
-    console.log(data);
+  const onSubmit = async (data: SignupData) => {
+    try {
+      let imageUrl = "";
+      const profilePicture = data.profilePicture[0];
+  
+      if (profilePicture) {
+        imageUrl = await Usecloudinaryimageupload(profilePicture);
+      }
+  
+      const userdata = {
+        ...data,
+        profilePicture: imageUrl, // Ensure the correct key name for the profile picture URL
+      };
+  
+      mutation.mutate(userdata);
+  
+     
+    } catch{
+      toast.error("Error uploading profile picture:");
+    }
   };
+  
 
   return (
     <>
       <Header />
 
       <div className="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-md">
-        <motion.h2 className="text-2xl font-bold mb-4 text-center font-serif"  
-        
-        initial={{ opacity: 0, y: -80 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ type: "spring", stiffness: 300 }}
-        >Sign Up</motion.h2>
-        <motion.img src={SignupImage} alt="Signup form" className="w-full rounded-md shadow-md mb-4"
-        
-        initial={{ opacity: 0, y: -80 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ type: "spring", stiffness: 300 }}
+        <motion.h2
+          className="text-2xl font-bold mb-4 text-center font-serif"
+          initial={{ opacity: 0, y: -80 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
+          Sign Up
+        </motion.h2>
+        <motion.img
+          src={SignupImage}
+          alt="Signup form"
+          className="w-full rounded-md shadow-md mb-4"
+          initial={{ opacity: 0, y: -80 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ type: "spring", stiffness: 300 }}
         />
-        <motion.form onSubmit={handleSubmit(onSubmit)} className="space-y-4"
-        
-        
-        initial={{ opacity: 0, y: -80 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ type: "spring", stiffness: 300 }}
+        <motion.form
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-4"
+          initial={{ opacity: 0, y: -80 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ type: "spring", stiffness: 300 }}
         >
           <div>
             <label htmlFor="name" className="block mb-1">
@@ -66,7 +91,9 @@ const Signup = () => {
               })}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
             />
-            {errors.name && <p className="text-red-500">{errors.name.message}</p>}
+            {errors.name && (
+              <p className="text-red-500">{errors.name.message}</p>
+            )}
           </div>
 
           <div>
@@ -125,6 +152,66 @@ const Signup = () => {
             />
             {errors.affiliation && (
               <p className="text-red-500">{errors.affiliation.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="profile" className="block mb-1">
+              Choose Profile
+            </label>
+            <select
+              id="profile"
+              {...register("profile", {
+                required: "Profile is required",
+              })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+            >
+              <option value="">Select a profile</option>
+              <option value="Researcher">Researcher</option>
+              <option value="Student">Student</option>
+              <option value="Professional">Professional</option>
+            </select>
+            {errors.profile && (
+              <p className="text-red-500">{errors.profile.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="profilePicture" className="block mb-1">
+              Upload Profile Picture (Optional)
+            </label>
+            <input
+              type="file"
+              id="profilePicture"
+              {...register("profilePicture")}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+            />
+            {errors.profilePicture && (
+              <p className="text-red-500">{errors.profilePicture.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="researchField" className="block mb-1">
+              Field of Research
+            </label>
+            <select
+              id="researchField"
+              {...register("researchField", {
+                required: "Field of Research is required",
+              })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+            >
+              <option value="">Select a field</option>
+              <option value="Computer Science">Computer Science</option>
+              <option value="Biology">Biology</option>
+              <option value="Physics">Physics</option>
+              <option value="Chemistry">Chemistry</option>
+              <option value="Mathematics">Mathematics</option>
+              <option value="Engineering">Engineering</option>
+            </select>
+            {errors.researchField && (
+              <p className="text-red-500">{errors.researchField.message}</p>
             )}
           </div>
 
