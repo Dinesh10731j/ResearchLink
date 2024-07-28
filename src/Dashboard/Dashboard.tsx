@@ -1,31 +1,24 @@
-import { PanelLeftClose, Menu as MenuIcon, Upload } from "lucide-react";
+import { PanelLeftClose, Menu as MenuIcon } from "lucide-react";
 import { useState } from "react";
 import { NavLinks } from "../utils/NavLinks";
 import { Link, Outlet } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import { UseGetProfile } from "../hooks/Usegetprofile";
+
 import { CircularProgress } from "@mui/material";
-import { useForm } from "react-hook-form";
-import { Usecloudinaryimageupload } from "../hooks/Useuploadprofilecloudinary";
 import { Toaster } from "react-hot-toast";
-import { toast } from "react-hot-toast";
-import { UseUploaduserprofile } from "../hooks/Useuploadprofile";
 import { UserUserdetails } from "../hooks/Usegetusername";
 
-interface imageUpload {
-  profile: FileList,
-}
+
+
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(true);
-  const mutation = UseUploaduserprofile();
-  const { register, handleSubmit } = useForm<imageUpload>();
+ 
   const navigate = useNavigate();
-  const { data, isLoading, isError} = UseGetProfile();
-  const user = UserUserdetails();
+  const {data,isLoading,isError} = UserUserdetails();
 
-  console.log(user?.data);
+
 
   const handleLogout = () => {
     Cookies.remove("token");
@@ -33,20 +26,7 @@ const Dashboard = () => {
     navigate("/auth/login");
   };
 
-  const onsubmit = async (data: imageUpload) => {
-    try {
-      const file = data.profile[0];
-      if (file) {
-        const imageUrl = await Usecloudinaryimageupload(file);
-        mutation.mutate(imageUrl);
-      } else {
-        toast.error('Please select a file to upload');
-      }
-    } catch (error) {
-      toast.error('Failed to upload image. Please try again.');
-    }
-  };
-
+  
   return (
     <>
       <div className="relative">
@@ -88,9 +68,9 @@ const Dashboard = () => {
                 <CircularProgress size={20} color="primary" />
               ) : isError ? (
                 <img src="https://avatar.iran.liara.run/public" className="h-20 w-20 rounded-full"/>
-              ) : data?.profile ? (
+              ) : data?.profilePicture ? (
                 <img
-                  src={data.profile}
+                  src={data?.profilePicture}
                   alt="User Avatar"
                   className="h-20 w-20 cursor-pointer rounded-full"
                 />
@@ -98,29 +78,13 @@ const Dashboard = () => {
                 <img src="https://avatar.iran.liara.run/public" className="h-20 w-20 rounded-full"/>
               )}
 
-              <section className="flex">
-                <form onSubmit={handleSubmit(onsubmit)} className="flex flex-col items-center justify-center">
-                <label
-                    htmlFor="profile-upload"
-                    className="bg-blue-600 text-white py-1 px-4 rounded-md cursor-pointer hover:bg-blue-700 shadow-md"
-                    
-                  >Upload profile</label>
-                  <input type="file" {...register("profile")} className="ml-12 rounded-md text-white hidden"  id="profile-upload"
-                
-                 
-                  
-                  />
-                  <button type="submit" className="mt-7 py-2  px-7 bg-blue-500 rounded-md text-white">
-                    <Upload color="white"/>
-                  </button>
-                </form>
-              </section>
+              
 {
   isLoading?(
     <CircularProgress size={20} color='primary'/>
   ):(
 <h1 className="text-center text-white text-2xl">
-    {`Hi,${user.data?.name}`}
+    {`Hi,${data?.name}`}
          </h1>
   )
     
@@ -134,7 +98,7 @@ const Dashboard = () => {
             <CircularProgress size={20} color="primary"/>
           ):(
               <h1 className="text-center text-white text-2xl">
-            {`${user.data?.affiliation}`}
+            {`${data?.affiliation}`}
                  </h1>
 
           )

@@ -16,8 +16,9 @@ const userLogin = async (logindata: Logindata) => {
   try {
    
     const response = await axiosInstance.post(UserLogin, logindata);
+    Cookies.set("token",response.data.token,{expires:1});
    
-    return response.data;
+    return response.data.data;
   } catch (error) {
     throw new Error("Login failed");
   }
@@ -32,8 +33,8 @@ export const UseUserLogin = () => {
     onSuccess: (data) => {
       toast.success("Login successful!");
   
-      Cookies.set("token",data?.token,{expires:1});
-      Cookies.set("userid",data.data?._id);
+      
+      Cookies.set("userid",data?._id);
      
     
       setTimeout(() => {
