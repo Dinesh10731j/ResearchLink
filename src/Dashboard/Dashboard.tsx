@@ -8,13 +8,15 @@ import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { Toaster } from "react-hot-toast";
 import { UserUserdetails } from "../hooks/Usegetusername";
-import {X} from "lucide-react"
+import {X,BellDot} from "lucide-react";
+
 
 
 
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(true);
+  const notification = 0;
 
  
   const navigate = useNavigate();
@@ -27,6 +29,12 @@ const Dashboard = () => {
     Cookies.remove("userid");
     navigate("/auth/login");
   };
+
+
+
+const ShowNotification = ()=>{
+  alert("This is notification")
+}
 
   
   return (
@@ -41,7 +49,7 @@ const Dashboard = () => {
           className="fixed top-4 left-4  cursor-pointer md:hidden"
         />
 
-      
+     
           
           <aside
             className={`min-h-screen pt-10 z-20 md:w-64 bg-[#2f2f2f] fixed top-0 left-0  transition-transform duration-300 md:relative md:translate-x-0 ${
@@ -126,6 +134,14 @@ const Dashboard = () => {
           
             <Outlet />
           </main>
+          <section className="fixed top-4 right-5 cursor-pointer">
+            <section className="flex gap-2">
+            <BellDot onClick={ShowNotification}/>
+            <p className="h-5 w-5 text-red-500 text-center ">{notification}</p>
+           
+            </section>
+      
+      </section>
          
         </div>
         <Toaster />
