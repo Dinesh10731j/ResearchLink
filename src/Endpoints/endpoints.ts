@@ -6,5 +6,6 @@ export const endpoints = {
     Uploadimage:'/api/upload-image',
 Userdetails:'/api/user-details',
 Researchpaper:'/api/research-papers',
-Researchlinkusers:'/api/users'
+Researchlinkusers:'/api/users',
+Sendrequest:'/api/send-request'
 }
