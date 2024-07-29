@@ -11,9 +11,11 @@ interface User {
   profilePicture: string;
   researchField: string;
   affiliation: string;
+ status:String,
 }
 
 const UserCard: React.FC<{ user: User; sendRequest: (id: string) => void }> = ({ user, sendRequest }) => (
+
   <Card className="flex flex-col justify-between h-full">
     <div>
       <CardMedia
@@ -39,7 +41,7 @@ const UserCard: React.FC<{ user: User; sendRequest: (id: string) => void }> = ({
     </div>
     <CardActions>
       <Button size="small" color="primary" onClick={() => sendRequest(user._id)}>
-        Send Request
+      Send Request
       </Button>
       <Link to={user?._id}>
         <Button size="small" color="primary">
