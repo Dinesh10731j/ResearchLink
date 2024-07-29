@@ -10,7 +10,6 @@ interface cloudinaryUrlType{
 
 const Uploaduserprofile  = async (cloudinaryUrl:cloudinaryUrlType)=>{
     const response = await axiosInstance.post(Uploadimage,{profile:cloudinaryUrl});
-    console.log(response)
 
     return response.data.data;
 }

@@ -19,7 +19,7 @@ const App = () => {
         <Route path="/auth/signup" element={<Signup />} />
 
         <Route element={<Protecteddashboard />}>
-          <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="/dashboard/*" element={<Dashboard />}>
             <Route path="feeds" element={<Feeds />} />
             <Route path="discover" element={<Discover />} />
             <Route path="statistics-analytics" element={<StatisticsandAnalytics />} />
