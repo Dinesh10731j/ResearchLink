@@ -1,4 +1,4 @@
-import { PanelLeftClose, Menu as MenuIcon } from "lucide-react";
+import {Menu as MenuIcon } from "lucide-react";
 import { useState } from "react";
 import { NavLinks } from "../utils/NavLinks";
 import { Link, Outlet } from "react-router-dom";
@@ -8,12 +8,14 @@ import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { Toaster } from "react-hot-toast";
 import { UserUserdetails } from "../hooks/Usegetusername";
+import {X} from "lucide-react"
 
 
 
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(true);
+
  
   const navigate = useNavigate();
   const {data,isLoading,isError} = UserUserdetails();
@@ -30,25 +32,28 @@ const Dashboard = () => {
   return (
     <>
       <div className="relative">
+       
+
+        <div className="flex flex-col bg-none md:flex-row">
         <MenuIcon
           color="#708090"
           onClick={() => setIsOpen(!isOpen)}
-          className="fixed top-4 left-4 z-10 cursor-pointer md:hidden"
+          className="fixed top-4 left-4  cursor-pointer md:hidden"
         />
 
-        <PanelLeftClose
-          color="#708090"
-          onClick={() => setIsOpen(!isOpen)}
-          className="fixed top-4 left-4 z-10 cursor-pointer hidden md:block"
-        />
-
-        <div className="flex flex-col md:flex-row">
+      
+          
           <aside
-            className={`h-screen pt-10 w-58 md:w-64 bg-[#2f2f2f] fixed top-0 left-0 transition-transform duration-300 md:relative md:translate-x-0 ${
+            className={`min-h-screen pt-10 z-20 md:w-64 bg-[#2f2f2f] fixed top-0 left-0  transition-transform duration-300 md:relative md:translate-x-0 ${
               isOpen ? "-translate-x-full" : "translate-x-0"
-            }`}
+            } `}
           >
+            <X className="fixed top-3 right-2 md:hidden cursor-pointer " color="white"
+            
+            onClick={()=>setIsOpen(!isOpen)}
+            />
             <nav>
+              
               <ul>
                 {NavLinks.map((link) => (
                   <li
@@ -115,13 +120,18 @@ const Dashboard = () => {
               </button>
             </section>
           </aside>
+      
 
           <main className={`flex-1 p-4 transition-all duration-300 `}>
+          
             <Outlet />
           </main>
+         
         </div>
         <Toaster />
+    
       </div>
+
     </>
   );
 };
