@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { UseUploadPaper } from '../hooks/Useuploadpaper';
-import { uploadToCloudinary } from '../hooks/Useuploadtocloudinary'; // Adjust the path
+import { uploadToCloudinary } from '../hooks/Useuploadtocloudinary'; 
 import {toast} from "react-hot-toast";
 import { Toaster } from 'react-hot-toast';
 import {Upload} from "lucide-react";

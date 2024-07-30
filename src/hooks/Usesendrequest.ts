@@ -3,6 +3,7 @@ import { endpoints } from "../Endpoints/endpoints";
 import axiosInstance from "../Endpoints/axiosInstance";
 import Cookies from "js-cookie";
 const {Sendrequest} = endpoints;
+import toast from "react-hot-toast";
 interface Userid{
     userid:string
 }
@@ -26,10 +27,10 @@ const SendRequest = async (userid:Userid)=>{
 export const UseSendRequest = ()=>{
     const mutataion =useMutation({mutationKey:['send-request'],mutationFn:SendRequest,
         onSuccess:()=>{
-            alert('Request send successfully')
+            toast.success('Request send successfully')
 
     },onError:()=>{
-        alert('failed to send request');
+        toast.error('Request already send ');
     }});
 
 

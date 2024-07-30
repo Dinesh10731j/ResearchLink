@@ -1,28 +1,20 @@
-import {Menu as MenuIcon } from "lucide-react";
+import { Menu as MenuIcon, X, BellDot } from "lucide-react";
 import { useState } from "react";
 import { NavLinks } from "../utils/NavLinks";
 import { Link, Outlet } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-
 import { CircularProgress } from "@mui/material";
 import { Toaster } from "react-hot-toast";
 import { UserUserdetails } from "../hooks/Usegetusername";
-import {X,BellDot} from "lucide-react";
-
-
-
-
+import { UseGetRequest } from "../hooks/UsegetfriendRequest";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(true);
-  const notification = 0;
-
- 
+  const [shownotification, setShownotification] = useState(false);
   const navigate = useNavigate();
-  const {data,isLoading,isError} = UserUserdetails();
-
-
+  const { data, isLoading, isError } = UserUserdetails();
+  const { data: friendRequests, isLoading: requestsLoading } = UseGetRequest();
 
   const handleLogout = () => {
     Cookies.remove("token");
@@ -30,38 +22,33 @@ const Dashboard = () => {
     navigate("/auth/login");
   };
 
+  const ShowNotification = () => {
+    setShownotification(!shownotification);
+  };
 
 
-const ShowNotification = ()=>{
-  alert("This is notification")
-}
+  const userId = Cookies.get("userid")
 
-  
   return (
     <>
       <div className="relative">
-       
-
         <div className="flex flex-col bg-none md:flex-row">
-        <MenuIcon
-          color="#708090"
-          onClick={() => setIsOpen(!isOpen)}
-          className="fixed top-4 left-4  cursor-pointer md:hidden"
-        />
-
-     
-          
+          <MenuIcon
+            color="#708090"
+            onClick={() => setIsOpen(!isOpen)}
+            className="fixed top-4 left-4 cursor-pointer md:hidden"
+          />
           <aside
-            className={`min-h-screen pt-10 z-20 md:w-64 bg-[#2f2f2f] fixed top-0 left-0  transition-transform duration-300 md:relative md:translate-x-0 ${
+            className={`min-h-screen pt-10 z-20 md:w-64 bg-[#2f2f2f] fixed top-0 left-0 transition-transform duration-300 md:relative md:translate-x-0 ${
               isOpen ? "-translate-x-full" : "translate-x-0"
             } `}
           >
-            <X className="fixed top-3 right-2 md:hidden cursor-pointer " color="white"
-            
-            onClick={()=>setIsOpen(!isOpen)}
+            <X
+              className="fixed top-3 right-2 md:hidden cursor-pointer"
+              color="white"
+              onClick={() => setIsOpen(!isOpen)}
             />
             <nav>
-              
               <ul>
                 {NavLinks.map((link) => (
                   <li
@@ -80,7 +67,10 @@ const ShowNotification = ()=>{
               {isLoading ? (
                 <CircularProgress size={20} color="primary" />
               ) : isError ? (
-                <img src="https://avatar.iran.liara.run/public" className="h-20 w-20 rounded-full"/>
+                <img
+                  src="https://avatar.iran.liara.run/public"
+                  className="h-20 w-20 rounded-full"
+                />
               ) : data?.profilePicture ? (
                 <img
                   src={data?.profilePicture}
@@ -88,37 +78,25 @@ const ShowNotification = ()=>{
                   className="h-20 w-20 cursor-pointer rounded-full"
                 />
               ) : (
-                <img src="https://avatar.iran.liara.run/public" className="h-20 w-20 rounded-full"/>
+                <img
+                  src="https://avatar.iran.liara.run/public"
+                  className="h-20 w-20 rounded-full"
+                />
               )}
 
-              
-{
-  isLoading?(
-    <CircularProgress size={20} color='primary'/>
-  ):(
-<h1 className="text-center text-white text-2xl">
-    {`Hi,${data?.name}`}
-         </h1>
-  )
-    
-}
-          
+              {isLoading ? (
+                <CircularProgress size={20} color="primary" />
+              ) : (
+                <h1 className="text-center text-white text-2xl">{`Hi, ${data?.name}`}</h1>
+              )}
 
-        
-        {
-
-          isLoading?(
-            <CircularProgress size={20} color="primary"/>
-          ):(
-              <h1 className="text-center text-white text-2xl">
-            {`${data?.affiliation}`}
-                 </h1>
-
-          )
-          
-
-        }
-            
+              {isLoading ? (
+                <CircularProgress size={20} color="primary" />
+              ) : (
+                <h1 className="text-center text-white text-2xl">
+                  {`${data?.affiliation}`}
+                </h1>
+              )}
 
               <button
                 className="bg-red-500 text-white py-2 px-10 ml-4 rounded-lg"
@@ -128,26 +106,77 @@ const ShowNotification = ()=>{
               </button>
             </section>
           </aside>
-      
 
           <main className={`flex-1 p-4 transition-all duration-300 `}>
-          
             <Outlet />
           </main>
-          <section className="fixed top-4 right-5 cursor-pointer">
+          <section className="fixed top-4 right-5">
             <section className="flex gap-2">
-            <BellDot onClick={ShowNotification}/>
-            <p className="h-5 w-5 text-red-500 text-center ">{notification}</p>
-           
+              <BellDot onClick={ShowNotification} className="z-4 cursor-pointer" />
+              <p className="h-5 w-5 text-red-500 text-center">{friendRequests?.length || 0}</p>
             </section>
-      
-      </section>
-         
-        </div>
-        <Toaster />
-    
-      </div>
 
+            <section
+              className={`h-[400px] w-[300px] shadow-md bg-[#2f2f2f] z-10 mt-10 rounded-md ${
+                shownotification ? "block" : "hidden"
+              }`}
+            >
+              {requestsLoading ? (
+                <CircularProgress size={20} color="primary" />
+              ) : friendRequests?.length > 0 ? (
+                <ul>
+                  {friendRequests.map((request: any) => (
+                    <li key={request._id} className="p-2 border-b border-gray-500">
+                      <div className="text-white">
+                      <p>
+  {request && request.sender ? (
+    request.sender._id === userId ? (
+      <div className="flex items-center gap-2 p-2 border border-gray-300 rounded-md bg-gray-50">
+        <img 
+          src={request.receiver?.profilePicture} 
+          alt={`${request.receiver?.name}'s profile`} 
+          className="h-10 w-10 rounded-full object-cover" 
+        />
+        <div>
+          <strong className="text-blue-600">You</strong> <span className="text-blue-600">sent a friend request to </span>
+          <span className="font-medium text-blue-600">{` ${request.receiver?.name}`}</span>.
+        </div>
+      </div>
+    ) : (
+      <div className="flex items-center gap-2 p-2 border border-gray-300 rounded-md bg-gray-50">
+        <img 
+          src={request.sender?.profilePicture} 
+          alt={`${request.sender?.name}'s profile`} 
+          className="h-10 w-10 rounded-full object-cover" 
+        />
+        <div>
+          <strong className="text-blue-600">{request.sender.name}</strong> <span  className="text-blue-600">sent you a friend request.</span>
+        </div>
+      </div>
+    )
+  ) : (
+    <div className="p-2 border border-gray-300 rounded-md bg-gray-50 text-gray-500">
+      No friend request found
+    </div>
+  )}
+</p>
+
+
+
+                        <p>{ new Date(request.createdAt).toLocaleString()}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-white text-center">No new friend requests</p>
+              )}
+            </section>
+          </section>
+        </div>
+
+        <Toaster />
+      </div>
     </>
   );
 };
