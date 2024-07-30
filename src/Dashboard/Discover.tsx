@@ -43,7 +43,7 @@ const UserCard: React.FC<{ user: User; sendRequest: (id: string) => void }> = ({
       <Button size="small" color="primary" onClick={() => sendRequest(user._id)}>
       Send Request
       </Button>
-      <Link to={user?._id}>
+      <Link to={`/dashboard/user-profile/${user?._id}`}>
         <Button size="small" color="primary">
           View Profile
         </Button>

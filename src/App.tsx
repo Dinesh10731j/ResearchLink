@@ -9,6 +9,7 @@ import StatisticsandAnalytics from "./Dashboard/StatisticsandAnalytics";
 import RecentActivities from "./Dashboard/RecentActivities";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UploadNewPaper from "./Dashboard/UploadNewPaper";
+import Userprofile from "./Dashboard/Userprofile";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
             <Route path="statistics-analytics" element={<StatisticsandAnalytics />} />
             <Route path="recent-activities" element={<RecentActivities/>}/>
             <Route path="upload-new-paper" element={<UploadNewPaper/>}/>
+            <Route path="user-profile/:id" element={<Userprofile/>}/>
           </Route>
         </Route>
       </Routes>
