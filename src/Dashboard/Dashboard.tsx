@@ -110,14 +110,23 @@ const Dashboard = () => {
           <main className={`flex-1 p-4 transition-all duration-300 `}>
             <Outlet />
           </main>
-          <section className="fixed top-4 right-5">
-            <section className="flex gap-2">
-              <BellDot onClick={ShowNotification} className="z-4 cursor-pointer" />
-              <p className="h-5 w-5 text-red-500 text-center">{friendRequests?.length || 0}</p>
+          <section className="fixed top-5 right-5 z-50">
+            <section className="flex gap-1">
+            <BellDot onClick={ShowNotification} className="z-20 cursor-pointer" />
+            <span className="font-sans text-red-600 h-7 text-center w-7 -py-3 rounded-full bg-black">{friendRequests?.length || 0}</span>
             </section>
+       
+
+          </section>
+          <section className="fixed top-4 right-5 ">
+         
+           
+              
+            
+        
 
             <section
-              className={`h-[400px] w-[300px] shadow-md bg-[#2f2f2f] z-10 mt-10 rounded-md ${
+              className={`h-[400px] w-[300px] shadow-md bg-[#2f2f2f]  mt-10 rounded-md ${
                 shownotification ? "block" : "hidden"
               }`}
             >
