@@ -28,7 +28,7 @@ const UserCard: React.FC<{ user: User; sendRequest: (id: string) => void }> = ({
         <Typography variant="h5" component="div">
           {user.name}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" >
           {user.profile}
         </Typography>
         <Typography variant="body2" color="text.secondary">

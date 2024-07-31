@@ -9,7 +9,7 @@ const fetchUserProfile = async (id:string)=>{
       
 const response = await axiosInstance.get(`${Getuserprofile}/${id}`);
 
-console.log('This is userprofile response',response.data.data);
+
 
 
 return response.data.data;
