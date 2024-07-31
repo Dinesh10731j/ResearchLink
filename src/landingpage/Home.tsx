@@ -127,6 +127,7 @@ const Home = () => {
           <section className="flex flex-wrap gap-4">
             {Topics?.map((topics) => (
               <motion.button
+              key={topics.topic}
                 className="border border-green-300 -py-2 py-2 px-5 text-sm  md:-py-3 md:py-3 md:px-10 text-green-300 rounded-full
        md:text-xl hover:bg-green-100"
                 initial={{ opacity: 0, y: -80 }}
