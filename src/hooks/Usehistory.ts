@@ -11,7 +11,7 @@ const fetchHistory = async ()=>{
         const userid = Cookies.get('userid');
         const response = await axiosInstance.get(`${Useractivities}/${userid}`);
 
-        console.log('This is response of the specific user activities',response.data.data);
+        
 
         return response.data.data;
 
