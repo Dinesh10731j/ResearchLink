@@ -1,12 +1,17 @@
-
-
+import { UseUserActivities } from "../hooks/Usehistory"
 const RecentActivities = () => {
+  const userActivities = UseUserActivities();
+
+  console.log(userActivities?.data);
   return (
-    <div className="bg-black w-96">
-        
-        <h1>RecentActivities</h1>
-        
-        </div>
+    <>
+    <section>
+      <h1>This is Recent Activities</h1>
+    </section>
+    
+    
+    
+    </>
   )
 }
 

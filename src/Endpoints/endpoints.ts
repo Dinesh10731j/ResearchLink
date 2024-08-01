@@ -8,5 +8,6 @@ Researchpaper:'/api/research-papers',
 Researchlinkusers:'/api/users',
 Sendrequest:'/api/send-request',
 Getrequest:'/api/get-request',
-Getuserprofile:'/api/user-profile'
+Getuserprofile:'/api/user-profile',
+Useractivities:'/api/user-activities'
 }
