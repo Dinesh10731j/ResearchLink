@@ -10,10 +10,13 @@ import RecentActivities from "./Dashboard/RecentActivities";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UploadNewPaper from "./Dashboard/UploadNewPaper";
 import Userprofile from "./Dashboard/Userprofile";
+import { DarkModeProvider } from "./context/DarkmodeContext";
 
 const App = () => {
   return (
-    <Router>
+    <DarkModeProvider>
+
+<Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auth/login" element={<Login />} />
@@ -31,6 +34,9 @@ const App = () => {
         </Route>
       </Routes>
     </Router>
+
+    </DarkModeProvider>
+    
   );
 };
 

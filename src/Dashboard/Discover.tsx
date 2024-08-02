@@ -1,8 +1,9 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo} from "react";
 import { UseGetResearchLinkUsers } from "../hooks/Useresearchlinkusers";
 import { UseSendRequest } from "../hooks/Usesendrequest";
 import { CircularProgress, Box, Grid, Typography, Card, CardMedia, CardContent, CardActions, Button, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
+
 
 interface User {
   _id: string;
@@ -11,11 +12,10 @@ interface User {
   profilePicture: string;
   researchField: string;
   affiliation: string;
- status:String,
+  status: string;
 }
 
 const UserCard: React.FC<{ user: User; sendRequest: (id: string) => void }> = ({ user, sendRequest }) => (
-
   <Card className="flex flex-col justify-between h-full">
     <div>
       <CardMedia
@@ -28,7 +28,7 @@ const UserCard: React.FC<{ user: User; sendRequest: (id: string) => void }> = ({
         <Typography variant="h5" component="div">
           {user.name}
         </Typography>
-        <Typography variant="body2" color="text.secondary" >
+        <Typography variant="body2" color="text.secondary">
           {user.profile}
         </Typography>
         <Typography variant="body2" color="text.secondary">
@@ -41,7 +41,7 @@ const UserCard: React.FC<{ user: User; sendRequest: (id: string) => void }> = ({
     </div>
     <CardActions>
       <Button size="small" color="primary" onClick={() => sendRequest(user._id)}>
-      Send Request
+        Send Request
       </Button>
       <Link to={`/dashboard/user-profile/${user?._id}`}>
         <Button size="small" color="primary">
@@ -57,7 +57,9 @@ const Discover: React.FC = () => {
   const sendRequestMutation = UseSendRequest();
   const [searchQuery, setSearchQuery] = useState("");
 
-  const sendRequest = (userid:any) => {
+  
+
+  const sendRequest = (userid: any) => {
     sendRequestMutation.mutate(userid);
   };
 
@@ -89,10 +91,10 @@ const Discover: React.FC = () => {
           Error loading users.
         </Typography>
       ) : (
-        <Grid container spacing={3}>
+        <Grid container spacing={3} >
           {filteredUsers.map((user: User) => (
             <Grid item key={user._id} xs={12} sm={6} md={4}>
-              <div className="h-full">
+              <div className={`h-full `}>
                 <UserCard user={user} sendRequest={sendRequest} />
               </div>
             </Grid>

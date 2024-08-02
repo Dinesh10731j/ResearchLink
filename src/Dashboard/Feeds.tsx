@@ -2,6 +2,8 @@ import { UseResearchPaper } from "../hooks/Usegetresearchpaper";
 import { motion } from "framer-motion";
 import { CircularProgress } from "@mui/material";
 import Box from "@mui/material/Box";
+import { DarkModeContext } from "../context/DarkmodeContext";
+import { useContext } from "react";
 
 interface ResearchPaperType {
   _id: string;
@@ -18,6 +20,16 @@ interface ResearchPaperType {
 
 const Feeds = () => {
   const { data: Researchpapers, isLoading } = UseResearchPaper();
+
+
+  const context = useContext(DarkModeContext);
+
+  if (context === null) {
+   
+    throw new Error('DarkModeContext must be used within a DarkModeProvider');
+  }
+
+  const { darkMode} = context;
 
 
   const containerVariants = {
@@ -61,12 +73,12 @@ const Feeds = () => {
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="bg-white  shadow-md p-6 rounded-lg hover:bg-gray-100  transition mt-20 md:mt-0 relative"
+              className={` shadow-md p-6 rounded-lg   transition mt-20 md:mt-20 relative ${darkMode?'bg-[#2D2D2A]':'bg-white '} `}
             >
-              <motion.h2 variants={itemVariants} className="text-2xl font-bold mb-2">
+              <motion.h2 variants={itemVariants} className={`text-2xl font-bold mb-2 ${darkMode?'text-white':''}`}>
                 {researchpaper.title}
               </motion.h2>
-              <motion.p variants={itemVariants} className="text-gray-700 mb-4">
+              <motion.p variants={itemVariants} className={`${darkMode?'text-white':''} text-gray-700 mb-4`}>
                 {researchpaper.description}
               </motion.p>
               <motion.div variants={itemVariants} className="text-sm text-gray-500">

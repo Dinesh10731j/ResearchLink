@@ -1,5 +1,5 @@
-import { Menu as MenuIcon, X, BellDot } from "lucide-react";
-import { useState } from "react";
+import { Menu as MenuIcon, X, BellDot,MoonIcon,SunIcon } from "lucide-react";
+import { useState,useContext } from "react";
 import { NavLinks } from "../utils/NavLinks";
 import { Link, Outlet } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -8,9 +8,19 @@ import { CircularProgress } from "@mui/material";
 import { Toaster } from "react-hot-toast";
 import { UserUserdetails } from "../hooks/Usegetusername";
 import { UseGetRequest } from "../hooks/UsegetfriendRequest";
+import { DarkModeContext } from "../context/DarkmodeContext";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(true);
+  const context = useContext(DarkModeContext);
+
+  if (context === null) {
+   
+    throw new Error('DarkModeContext must be used within a DarkModeProvider');
+  }
+
+  const { darkMode, setDarkMode } = context;
+
   const [shownotification, setShownotification] = useState(false);
   const navigate = useNavigate();
   const { data, isLoading, isError } = UserUserdetails();
@@ -27,12 +37,13 @@ const Dashboard = () => {
   };
 
 
-  const userId = Cookies.get("userid")
+  const userId = Cookies.get("userid");
+
 
   return (
     <>
-      <div className="relative">
-        <div className="flex flex-col bg-none md:flex-row">
+      <div className={`relative ${darkMode?'bg-[#2D2D2A]':''} delay-100 transition-all`}>
+        <div className="flex flex-col bg-none gap-3 md:flex-row">
           <MenuIcon
             color="#708090"
             onClick={() => setIsOpen(!isOpen)}
@@ -107,16 +118,24 @@ const Dashboard = () => {
             </section>
           </aside>
 
-          <main className={`flex-1 p-4 transition-all duration-300 `}>
+          <main className={`flex-1 p-4 transition-all duration-300  `}>
             <Outlet />
           </main>
           <section className="fixed top-5 right-5 z-50">
             <section className="flex gap-1">
-            <BellDot onClick={ShowNotification} className="z-20 cursor-pointer" />
+            <BellDot onClick={ShowNotification} className="z-20 cursor-pointer" color={`${darkMode?'white':'black'}`} />
             <span className="font-sans text-red-600 h-7 text-center w-7 -py-3 rounded-full bg-black">{friendRequests?.length || 0}</span>
             </section>
        
 
+          </section>
+
+          <section className="fixed top-5 right-32 cursor-pointer">
+            {darkMode ? (
+              <SunIcon onClick={() => setDarkMode(!darkMode)} color={`${darkMode?'white':'black'}`} />
+            ) : (
+              <MoonIcon onClick={() => setDarkMode(!darkMode)} color={`${darkMode?'white':'black'}`} />
+            )}
           </section>
           <section className="fixed top-4 right-5 ">
          
@@ -165,7 +184,7 @@ const Dashboard = () => {
     )
   ) : (
     <div className="p-2 border border-gray-300 rounded-md bg-gray-50 text-gray-500">
-      No friend request found
+     <h1>No request found</h1>
     </div>
   )}
 </p>
@@ -181,7 +200,14 @@ const Dashboard = () => {
                 <p className="text-white text-center">No new friend requests</p>
               )}
             </section>
+
+
+           
           </section>
+
+
+         
+
         </div>
 
         <Toaster />
