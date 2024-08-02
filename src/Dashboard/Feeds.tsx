@@ -4,6 +4,7 @@ import { CircularProgress } from "@mui/material";
 import Box from "@mui/material/Box";
 import { DarkModeContext } from "../context/DarkmodeContext";
 import { useContext } from "react";
+import {ThumbsUp,ThumbsDown} from "lucide-react"
 
 interface ResearchPaperType {
   _id: string;
@@ -112,6 +113,16 @@ const Feeds = () => {
               >
                 View Research Paper
               </motion.a>
+
+
+              <div className="flex gap-4 mt-4 ">
+                <ThumbsUp className="cursor-pointer" color="#1877F2"/>
+                <h1 className={`${darkMode?'text-white':''}`}>{0}</h1>
+                <ThumbsDown className="cursor-pointer mt-1" color="#FF0000"/>
+                <h1 className={`${darkMode?'text-white':''}`}>{0}</h1>
+              </div>
+
+
             </motion.div>
           ))
         )}
