@@ -18,12 +18,30 @@ interface User {
 const UserCard: React.FC<{ user: User; sendRequest: (id: string) => void }> = ({ user, sendRequest }) => (
   <Card className="flex flex-col justify-between h-full">
     <div>
-      <CardMedia
-        component="img"
-        height="120"
-        image={user.profilePicture}
-        alt={user.name}
-      />
+
+      {
+user?.profilePicture?(
+  <CardMedia
+  component="img"
+  height="120"
+  image={user.profilePicture}
+  alt={user.name}
+/>
+):(
+  // <img
+  // src="https://avatar.iran.liara.run/public"
+  // className="h-20 w-20 rounded-full"
+
+
+  <CardMedia
+  component="img"
+  height="120"
+  image='https://avatar.iran.liara.run/public'
+  alt={user.name}
+/>
+)
+      }
+     
       <CardContent>
         <Typography variant="h5" component="div">
           {user.name}
