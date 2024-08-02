@@ -118,7 +118,7 @@ const Feeds = () => {
               <div className="flex gap-4 mt-4 ">
                 <ThumbsUp className="cursor-pointer" color="#1877F2"/>
                 <h1 className={`${darkMode?'text-white':''}`}>{0}</h1>
-                <ThumbsDown className="cursor-pointer mt-1" color="#FF0000"/>
+                <ThumbsDown className="cursor-pointer mt-1" color="#D9534F"/>
                 <h1 className={`${darkMode?'text-white':''}`}>{0}</h1>
               </div>
 
