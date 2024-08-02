@@ -46,7 +46,7 @@ const {darkMode} = context;
 
             >
               <h2 className={`text-xl font-bold mb-2 ${darkMode?'text-white':''}`}>{activity.title}</h2>
-              <p className={`text-gray-700 mb-4  ${darkMode?'text-gray-300':''}`}>{activity.description}</p>
+              <p className={`text-gray-700 mb-4  ${darkMode?'text-gray-100':''}`}>{activity.description}</p>
               <a
                 href={activity.researchpaper}
                 className="text-blue-500 hover:underline"
