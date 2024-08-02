@@ -27,7 +27,7 @@ if(context === null){
 const {darkMode} = context;
   
   return (
-    <section className="p-4 max-w-4xl mx-auto">
+    <section className="p-4 max-w-4xl mx-auto ">
       {isLoading ? (
         <div className="flex justify-center items-center h-screen">
           <CircularProgress size={30} />
