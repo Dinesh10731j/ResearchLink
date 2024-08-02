@@ -73,7 +73,7 @@ const Feeds = () => {
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className={` shadow-md p-6 rounded-lg   transition mt-20 md:mt-20 relative ${darkMode?'bg-[#2D2D2A]':'bg-white '} `}
+              className={` shadow-md p-6 rounded-lg transition mt-20 md:mt-20 relative ${darkMode?'bg-[#2D2D2A]':'bg-white '} `}
             >
               <motion.h2 variants={itemVariants} className={`text-2xl font-bold mb-2 ${darkMode?'text-white':''}`}>
                 {researchpaper.title}

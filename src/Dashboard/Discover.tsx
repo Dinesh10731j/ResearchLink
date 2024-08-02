@@ -74,7 +74,7 @@ const Discover: React.FC = () => {
   }, [searchQuery, Users.data]);
 
   return (
-    <Box p={3}>
+    <Box p={3}  height={'100vh'}>
       <TextField
         label="Search Users"
         variant="outlined"

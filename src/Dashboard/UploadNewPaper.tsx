@@ -4,7 +4,9 @@ import { uploadToCloudinary } from '../hooks/Useuploadtocloudinary';
 import {toast} from "react-hot-toast";
 import { Toaster } from 'react-hot-toast';
 import {Upload} from "lucide-react";
-import Cookies from "js-cookie"
+import Cookies from "js-cookie";
+import { useContext } from 'react';
+import { DarkModeContext } from '../context/DarkmodeContext';
 
 interface FileUploadData {
   title: string;
@@ -14,6 +16,15 @@ interface FileUploadData {
 
 const UploadNewPaper = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<FileUploadData>();
+  const context = useContext(DarkModeContext);
+
+if(context === null){
+  throw new Error('DarkModeContext must be used within a DarkModeProvider')
+}
+
+
+const {darkMode} = context
+
   const mutation = UseUploadPaper();
 
   const onSubmit = async (data: FileUploadData) => {
@@ -42,11 +53,11 @@ const UploadNewPaper = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 md:p-6 lg:p-8 mt-5">
-      <h1 className="text-2xl font-semibold mb-4">Upload New Paper</h1>
+    <div className="container mx-auto p-4 mt-20 md:p-6 lg:p-8  h-[100vh]">
+      <h1 className={`text-2xl font-semibold mb-4 ${darkMode?'text-white':''}`}>Upload New Paper</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
+          <label htmlFor="title" className={`block text-sm font-medium text-gray-700 ${darkMode?'text-white':''}`}>Title</label>
           <input
             type="text"
             id="title"
@@ -57,7 +68,7 @@ const UploadNewPaper = () => {
         </div>
 
         <div>
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
+          <label htmlFor="description" className={`block text-sm font-medium text-gray-700 ${darkMode?'text-white':''}`}>Description</label>
           <textarea
             id="description"
             {...register('description')}
