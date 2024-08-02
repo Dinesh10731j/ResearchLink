@@ -65,6 +65,11 @@ const Userprofile = () => {
             <p>User field not found</p>
           )}
         </section>
+
+
+        <section>
+          <button className="py-2 px-12 bg-blue-500 text-white rounded-md shadow-md">Message</button>
+        </section>
       </section>
     </>
   );
