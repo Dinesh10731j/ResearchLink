@@ -42,7 +42,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className={`relative ${darkMode?'bg-[#2D2D2A]':''}  transition-all`}>
+      <div className={`relative ${darkMode?'bg-[#2D2D2A]':''} h-screen transition-all`}>
         <div className="flex flex-col bg-none gap-3 md:flex-row">
           <MenuIcon
             color="#708090"
