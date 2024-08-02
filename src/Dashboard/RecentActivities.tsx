@@ -1,7 +1,8 @@
 import { UseUserActivities } from "../hooks/Usehistory";
 import { CircularProgress } from "@mui/material";
 import { motion } from "framer-motion";
-
+import { DarkModeContext } from "../context/DarkmodeContext";
+import { useContext } from "react";
 
 interface RecentActivity {
   _id: string;
@@ -16,6 +17,14 @@ interface RecentActivity {
 
 const RecentActivities = () => {
   const { data, isLoading, isError } = UseUserActivities();
+
+const context = useContext(DarkModeContext);
+
+if(context === null){
+  throw new Error('DarkModeContext must be used within a DarkModeProvider');
+}
+
+const {darkMode} = context;
   
   return (
     <section className="p-4 max-w-4xl mx-auto">
@@ -30,13 +39,14 @@ const RecentActivities = () => {
           {data?.map((activity: RecentActivity) => (
             <motion.div
               key={activity._id}
-              className="bg-white p-6 rounded-lg shadow-md"
+              className={` p-6 rounded-lg shadow-md ${darkMode?'bg-[#2D2D2A]':'bg-white'}`}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
+
             >
-              <h2 className="text-xl font-bold mb-2">{activity.title}</h2>
-              <p className="text-gray-700 mb-4">{activity.description}</p>
+              <h2 className={`text-xl font-bold mb-2 ${darkMode?'text-white':''}`}>{activity.title}</h2>
+              <p className={`text-gray-700 mb-4  ${darkMode?'text-gray-300':''}`}>{activity.description}</p>
               <a
                 href={activity.researchpaper}
                 className="text-blue-500 hover:underline"
