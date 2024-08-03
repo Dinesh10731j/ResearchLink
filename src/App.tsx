@@ -10,6 +10,7 @@ import RecentActivities from "./Dashboard/RecentActivities";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UploadNewPaper from "./Dashboard/UploadNewPaper";
 import Userprofile from "./Dashboard/Userprofile";
+import Chat from "./Dashboard/Chat";
 import { DarkModeProvider } from "./context/DarkmodeContext";
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
             <Route path="recent-activities" element={<RecentActivities/>}/>
             <Route path="upload-new-paper" element={<UploadNewPaper/>}/>
             <Route path="user-profile/:id" element={<Userprofile/>}/>
+            <Route path="chat" element={<Chat/>} />
           </Route>
         </Route>
       </Routes>

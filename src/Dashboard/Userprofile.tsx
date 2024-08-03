@@ -3,6 +3,7 @@ import { UseUserProfile } from "../hooks/Usegetuserprofile";
 import { useParams } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { DarkModeContext } from "../context/DarkmodeContext";
+import {Link} from "react-router-dom"
 
 const Userprofile = () => {
   const { id } = useParams();
@@ -68,7 +69,7 @@ const Userprofile = () => {
 
 
         <section>
-          <button className="py-2 px-12 bg-blue-500 text-white rounded-md shadow-md">Message</button>
+        <Link to="/dashboard/chat"><button className="py-2 px-12 bg-blue-500 text-white rounded-md shadow-md">Message</button></Link>  
         </section>
       </section>
     </>
