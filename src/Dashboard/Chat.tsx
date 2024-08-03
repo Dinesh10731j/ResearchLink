@@ -7,7 +7,7 @@ interface ChatMessage {
   message: string;
 }
 
-const socket = io();
+const socket = io('https://researchlink-api.onrender.com/');
 
 const Chat: React.FC = () => {
   const { register, handleSubmit, reset } = useForm<ChatMessage>();
@@ -31,6 +31,7 @@ const Chat: React.FC = () => {
   }, []);
 
   const sendMessage: SubmitHandler<ChatMessage> = (data) => {
+   
     if (data.message.trim() !== '') {
       socket.emit('chat message', data.message);
       reset();
@@ -38,7 +39,7 @@ const Chat: React.FC = () => {
   };
 
   return (
-    <div className={`flex flex-col h-screen mt-10 max-w-lg mx-auto border rounded-lg shadow-lg ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
+    <div className={`flex flex-col h-screen mt-10 max-w-lg mx-auto border rounded-lg shadow-lg ${darkMode ? 'bg-[#353b48] text-white' : 'bg-white text-black'}`}>
       <div className={`p-4 border-b ${darkMode ? 'bg-gray-900' : 'bg-gray-200'}`}>
         <h2 className="text-lg font-semibold">Chat</h2>
       </div>
