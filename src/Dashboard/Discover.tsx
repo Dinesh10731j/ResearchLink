@@ -94,6 +94,7 @@ const Discover: React.FC = () => {
       <TextField
         label="Search Users"
         variant="outlined"
+        sx={{border:'1px solid white'}}
         fullWidth
         margin="normal"
         onChange={(e) => setSearchQuery(e.target.value)}
