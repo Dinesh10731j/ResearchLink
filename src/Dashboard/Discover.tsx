@@ -28,9 +28,7 @@ user?.profilePicture?(
   alt={user.name}
 />
 ):(
-  // <img
-  // src="https://avatar.iran.liara.run/public"
-  // className="h-20 w-20 rounded-full"
+
 
 
   <CardMedia
@@ -92,7 +90,7 @@ const Discover: React.FC = () => {
   }, [searchQuery, Users.data]);
 
   return (
-    <Box p={3}  height={'100vh'}>
+    <Box p={3}  height={'min-h-screen'}>
       <TextField
         label="Search Users"
         variant="outlined"
