@@ -160,11 +160,19 @@ const Dashboard = () => {
   {request && request.sender ? (
     request.sender._id === userId ? (
       <div className="flex items-center gap-2 p-2 border border-gray-300 rounded-md bg-gray-50">
-        <img 
-          src={request.receiver?.profilePicture} 
-          alt={`${request.receiver?.name}'s profile`} 
-          className="h-10 w-10 rounded-full object-cover" 
-        />
+
+        {
+          request.receiver?.profilePicture?(
+            <img 
+            src={request.receiver?.profilePicture} 
+            alt={`${request.receiver?.name}'s profile`} 
+            className="h-10 w-10 rounded-full object-cover" 
+          />
+          ):(
+            <img src="https://avatar.iran.liara.run/public" alt={request?.name} className="h-10 w-10 rounded-full object-cover"/>
+          )
+        }
+       
         <div>
           <strong className="text-blue-600">You</strong> <span className="text-blue-600">sent a friend request to </span>
           <span className="font-medium text-blue-600">{` ${request.receiver?.name}`}</span>.
@@ -172,11 +180,19 @@ const Dashboard = () => {
       </div>
     ) : (
       <div className="flex items-center gap-2 p-2 border border-gray-300 rounded-md bg-gray-50">
-        <img 
-          src={request.sender?.profilePicture} 
-          alt={`${request.sender?.name}'s profile`} 
-          className="h-10 w-10 rounded-full object-cover" 
-        />
+        {
+          request.sender?.profilePicture?(
+            <img 
+            src={request.sender?.profilePicture} 
+            alt={`${request.sender?.name}'s profile`} 
+            className="h-10 w-10 rounded-full object-cover" 
+          />
+          ):(
+            <img src="https://avatar.iran.liara.run/public" alt={request?.name} className="h-10 w-10 object-cover rounded-full"/>
+          )
+
+        }
+       
         <div>
           <strong className="text-blue-600">{request.sender.name}</strong> <span  className="text-blue-600">sent you a friend request.</span>
         </div>
