@@ -4,10 +4,11 @@ import Footer from '../components/Footer';
 import { motion } from 'framer-motion';
 import LoginImage from '../assets/login.jpg'; 
 import { Link, useNavigate } from 'react-router-dom';
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { UseUserLogin } from '../hooks/Uselogin';
 import { CircularProgress } from '@mui/material';
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import {jwtDecode} from "jwt-decode"
 
 interface LoginData {
   email: string;
@@ -24,17 +25,20 @@ const Login = () => {
   };
 
   const handleGoogleSuccess = (credentialResponse: any) => {
-    console.log(credentialResponse);
-   
+    const token = credentialResponse.credential;
+    const decoded = jwtDecode(token);
+    console.log(decoded);
+
+ 
     navigate('/dashboard');
   };
 
   const handleGoogleError = () => {
-    console.log('Login Failed');
+    toast.error('Failed  to signup with google!')
   };
 
   return (
-    <GoogleOAuthProvider clientId="205961116075-ssrduvugr239mvnitpg5dsnfvcgl24hb.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
       <>
         <Header />
         <motion.section
