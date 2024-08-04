@@ -2,9 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { DarkModeContext } from '../context/DarkmodeContext';
 import io from 'socket.io-client';
-
 interface ChatMessage {
   message: string;
+  
 }
 
 const socket = io('https://researchlink-api.onrender.com/');
@@ -29,6 +29,8 @@ const Chat: React.FC = () => {
       socket.off('chat message');
     };
   }, []);
+
+ 
 
   const sendMessage: SubmitHandler<ChatMessage> = (data) => {
    
