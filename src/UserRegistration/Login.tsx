@@ -4,15 +4,21 @@ import Footer from '../components/Footer';
 import { motion } from 'framer-motion';
 import LoginImage from '../assets/login.jpg'; 
 import { Link, useNavigate } from 'react-router-dom';
-import { Toaster } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 import { UseUserLogin } from '../hooks/Uselogin';
 import { CircularProgress } from '@mui/material';
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import {jwtDecode} from 'jwt-decode';
+import Cookies from 'js-cookie';
 
 interface LoginData {
   email: string;
   password: string;
+}
+
+interface GoogleUserData {
+  name: string;
+  picture: string;
 }
 
 const Login = () => {
@@ -26,15 +32,19 @@ const Login = () => {
 
   const handleGoogleSuccess = (credentialResponse: any) => {
     const token = credentialResponse.credential;
-    const decoded = jwtDecode(token);
-    console.log(decoded);
+    const decoded: GoogleUserData = jwtDecode(token);
+    
+    
+    Cookies.set('token', token);
+    Cookies.set('username', decoded.name);
+    Cookies.set('profilePicture', decoded.picture);
 
-    // Assuming you handle authentication here and it is successful
+    toast.success('Google signin successful!');
     navigate('/dashboard');
   };
 
   const handleGoogleError = () => {
-    console.log('Login Failed');
+    toast.error('Google signin failed!');
   };
 
   return (
@@ -98,9 +108,7 @@ const Login = () => {
                   type="submit"
                   className="w-full bg-green-300 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-200"
                 >
-                  {mutation.isPending ? (<CircularProgress size={20} />) : (
-                    'Login'
-                  )}
+                  {mutation.isPending ? <CircularProgress size={20} /> : 'Login'}
                 </button>
 
                 {/* Signup Button */}
