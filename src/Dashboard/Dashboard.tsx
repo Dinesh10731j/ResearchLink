@@ -145,7 +145,7 @@ const Dashboard = () => {
         
 
             <section
-              className={`h-[400px] w-[300px] shadow-md bg-[#2f2f2f]  mt-10 rounded-md ${
+              className={`h-[400px] w-[300px] shadow-md bg-[#2f2f2f] overflow-y-auto  mt-10 rounded-md ${
                 shownotification ? "block" : "hidden"
               }`}
             >
