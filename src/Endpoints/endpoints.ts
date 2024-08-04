@@ -9,5 +9,6 @@ Researchlinkusers:'/api/users',
 Sendrequest:'/api/send-request',
 Getrequest:'/api/get-request',
 Getuserprofile:'/api/user-profile',
-Useractivities:'/api/user-activities'
+Useractivities:'/api/user-activities',
+Userstats:'/api/user-stats'
 }
