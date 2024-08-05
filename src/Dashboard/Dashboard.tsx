@@ -28,7 +28,7 @@ const Dashboard = () => {
     throw new Error('UserContext must be used within a UserProvider');
   }
   const { user } = userContext;
-  console.log(user);
+
 
   const [shownotification, setShownotification] = useState(false);
   const navigate = useNavigate();
