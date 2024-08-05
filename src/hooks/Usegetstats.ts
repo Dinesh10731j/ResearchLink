@@ -11,7 +11,7 @@ const FetchUserStats = async ()=>{
         const userid = Cookies.get('userid');
 
         const response = await axiosInstance.get(`${Userstats}/${userid}`);
-        console.log('This is stats response',response.data.data);
+        
 
         return response.data.data;
 
