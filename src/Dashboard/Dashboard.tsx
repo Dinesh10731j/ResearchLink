@@ -35,7 +35,7 @@ const Dashboard = () => {
   }
   const {user} = Usercontext;
 
-  console.log(user)
+  
 
 
 
@@ -108,7 +108,7 @@ const Dashboard = () => {
                 />
               ) : (
                 <img
-                  src="https://avatar.iran.liara.run/public"
+                  src={user.picture}
                   className="h-20 w-20 rounded-full"
                 />
               )}
@@ -116,7 +116,7 @@ const Dashboard = () => {
               {isLoading ? (
                 <CircularProgress size={20} color="primary" />
               ) : (
-                <h1 className="text-center text-white text-2xl">{`Hi, ${data?.name}`}</h1>
+                <h1 className="text-center text-white text-2xl">{`Hi, ${data?.name}`}</h1> || <h1 className="text-center text-white text-2xl">{`Hi,${user.name}`}</h1>
               )}
 
               {isLoading ? (
@@ -124,7 +124,7 @@ const Dashboard = () => {
               ) : (
                 <h1 className="text-center text-white text-2xl">
                   {`${data?.affiliation}`}
-                </h1>
+                </h1> || <h1  className="text-center text-white text-2xl">Student</h1>
               )}
 
               <button

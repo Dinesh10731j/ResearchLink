@@ -72,7 +72,7 @@ const Login = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: 'spring', stiffness: 300 }}
         >
-          <div className="max-w-md w-full p-6 bg-white rounded-md shadow-md flex flex-col items-center">
+          <div className="max-w-md w-full p-6 bg-white rounded-md shadow-md flex flex-col items-center mt-10">
             {/* Image Section */}
             <section className="mb-4">
               <img src={LoginImage} alt="Login" className="w-full rounded-md shadow-md" />
