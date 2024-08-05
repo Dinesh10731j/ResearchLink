@@ -108,7 +108,7 @@ const Dashboard = () => {
                 />
               ) : (
                 <img
-                  src={user.profile}
+                  src={user.picture}
                   className="h-20 w-20 rounded-full"
                 />
               )}
