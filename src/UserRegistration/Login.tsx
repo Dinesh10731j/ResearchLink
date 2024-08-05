@@ -9,7 +9,8 @@ import { UseUserLogin } from '../hooks/Uselogin';
 import { CircularProgress } from '@mui/material';
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import {jwtDecode} from 'jwt-decode';
-import Cookies from 'js-cookie';
+import { UserContext } from '../context/Usercontext';
+import { useContext } from 'react';
 
 interface LoginData {
   email: string;
@@ -30,14 +31,26 @@ const Login = () => {
     mutation.mutate(data);
   };
 
+
+  //userContext
+
+
+  const Usercontext = useContext(UserContext);
+
+
+
+  if(Usercontext === null){
+    throw new Error('UserContext must be used within a DarkModeProvider')
+  }
+  const {setUser} = Usercontext
+
+
   const handleGoogleSuccess = (credentialResponse: any) => {
     const token = credentialResponse.credential;
     const decoded: GoogleUserData = jwtDecode(token);
     
-    
-    Cookies.set('token', token);
-    Cookies.set('username', decoded.name);
-    Cookies.set('profilePicture', decoded.picture);
+
+    setUser(decoded)
 
     toast.success('Google signin successful!');
     navigate('/dashboard');

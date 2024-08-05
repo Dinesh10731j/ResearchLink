@@ -9,6 +9,8 @@ import { Toaster } from "react-hot-toast";
 import { UserUserdetails } from "../hooks/Usegetusername";
 import { UseGetRequest } from "../hooks/UsegetfriendRequest";
 import { DarkModeContext } from "../context/DarkmodeContext";
+import { UserContext } from "../context/Usercontext";
+
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -20,6 +22,22 @@ const Dashboard = () => {
   }
 
   const { darkMode, setDarkMode } = context;
+
+  //usercontext 
+
+
+  const Usercontext = useContext(UserContext);
+
+
+
+  if(Usercontext === null){
+    throw new Error('UserContext must be used within a User Provider')
+  }
+  const {user} = Usercontext;
+
+  console.log(user)
+
+
 
   const [shownotification, setShownotification] = useState(false);
   const navigate = useNavigate();
