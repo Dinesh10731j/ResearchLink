@@ -55,7 +55,11 @@ const Login = () => {
     Cookies.set("token",token);
 
     toast.success('Google signin successful!');
-    navigate('/dashboard');
+
+    setTimeout(()=>{
+      navigate('/dashboard');
+    },2000)
+   
   };
 
   const handleGoogleError = () => {

@@ -96,7 +96,7 @@ const Dashboard = () => {
                 />
               ) : (
                 <img
-                  src={user?.picture || "https://avatar.iran.liara.run/public"}
+                  src={user?.picture }
                   className="h-20 w-20 rounded-full"
                 />
               )}
