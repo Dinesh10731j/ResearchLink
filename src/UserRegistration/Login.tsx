@@ -11,6 +11,7 @@ import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import {jwtDecode} from 'jwt-decode';
 import { UserContext } from '../context/Usercontext';
 import { useContext } from 'react';
+import Cookies from 'js-cookie';
 
 interface LoginData {
   email: string;
@@ -50,7 +51,8 @@ const Login = () => {
     const decoded: GoogleUserData = jwtDecode(token);
     
 
-    setUser(decoded)
+    setUser(decoded);
+    Cookies.set("token",token);
 
     toast.success('Google signin successful!');
     navigate('/dashboard');
