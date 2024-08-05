@@ -12,9 +12,11 @@ import UploadNewPaper from "./Dashboard/UploadNewPaper";
 import Userprofile from "./Dashboard/Userprofile";
 import Chat from "./Dashboard/Chat";
 import { DarkModeProvider } from "./context/DarkmodeContext";
+import { UserProvider } from "./context/Usercontext";
 
 const App = () => {
   return (
+    <UserProvider>
     <DarkModeProvider>
 
 <Router>
@@ -38,6 +40,7 @@ const App = () => {
     </Router>
 
     </DarkModeProvider>
+    </UserProvider>
     
   );
 };
