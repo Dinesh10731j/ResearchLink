@@ -5,6 +5,8 @@ import Box from "@mui/material/Box";
 import { DarkModeContext } from "../context/DarkmodeContext";
 import { useContext, useState } from "react";
 import { ThumbsUp, ThumbsDown } from "lucide-react";
+import { Useuserdislike } from "../hooks/Usedislike";
+import { Useuserlike } from "../hooks/Uselike";
 
 interface ResearchPaperType {
   _id: string;
@@ -21,6 +23,9 @@ interface ResearchPaperType {
 
 const Feeds = () => {
   const { data: Researchpapers, isLoading } = UseResearchPaper();
+  const dislikemutation = Useuserdislike();
+  const likemutation = Useuserlike();
+
   const [searchQuery, setSearchQuery] = useState("");
   const context = useContext(DarkModeContext);
 
@@ -49,10 +54,12 @@ const Feeds = () => {
     visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300 } },
   };
 
+  const handleLike = (likes: string) => {
+    likemutation.mutate(likes);
+  };
 
-
-  const handleLike=(likes:string)=>{
-    console.log(likes)
+  const handleDislike = (dislike: string) => {
+    dislikemutation.mutate(dislike);
   }
 
   return (
@@ -123,9 +130,9 @@ const Feeds = () => {
               </motion.a>
 
               <div className="flex gap-4 mt-4">
-                <ThumbsUp className="cursor-pointer" color="#1877F2" onClick={()=>handleLike(researchpaper._id)} />
+                <ThumbsUp className="cursor-pointer" color="#1877F2" onClick={() => handleLike(researchpaper._id)} />
                 <h1 className={`${darkMode ? "text-white" : ""}`}>{0}</h1>
-                <ThumbsDown className="cursor-pointer mt-1" color="#D9534F" />
+                <ThumbsDown className="cursor-pointer mt-1" color="#D9534F" onClick={() => handleDislike(researchpaper._id)} />
                 <h1 className={`${darkMode ? "text-white" : ""}`}>{0}</h1>
               </div>
             </motion.div>

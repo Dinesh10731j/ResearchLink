@@ -10,5 +10,7 @@ Sendrequest:'/api/send-request',
 Getrequest:'/api/get-request',
 Getuserprofile:'/api/user-profile',
 Useractivities:'/api/user-activities',
-Userstats:'/api/user-stats'
+Userstats:'/api/user-stats',
+Userdislikes:'/api/dislikes',
+Userlikes:'/api/like'
 }
