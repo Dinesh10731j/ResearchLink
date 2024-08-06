@@ -1,7 +1,7 @@
 import { createContext, useState, ReactNode } from 'react';
 
 interface UserContextType {
-  user: any;
+  user:any;
   setUser: React.Dispatch<React.SetStateAction<any>>;
 }
 
