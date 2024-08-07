@@ -12,7 +12,7 @@ const Userdislike = async (dislikeid:string) => {
         console.log(response.data.data);
         return response.data.data;
     }catch{
-        throw new Error('Failed to dislike the researchpaper')
+        throw new Error('Failed to like the researchpaper')
     }
   
 };

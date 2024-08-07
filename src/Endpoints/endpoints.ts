@@ -12,5 +12,5 @@ Getuserprofile:'/api/user-profile',
 Useractivities:'/api/user-activities',
 Userstats:'/api/user-stats',
 Userdislikes:'/api/dislikes',
-Userlikes:'/api/like'
+Userlikes:'/api/likes'
 }
