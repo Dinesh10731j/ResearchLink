@@ -3,12 +3,14 @@ import { motion } from "framer-motion";
 import { CircularProgress } from "@mui/material";
 import Box from "@mui/material/Box";
 import { DarkModeContext } from "../context/DarkmodeContext";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { ThumbsUp, ThumbsDown } from "lucide-react";
 import { Useuserdislike } from "../hooks/Usedislike";
 import { Useuserlike } from "../hooks/Uselike";
 
 interface ResearchPaperType {
+  initialLikes: number;
+  initialDislikes: number;
   _id: string;
   title: string;
   description: string;
@@ -27,6 +29,10 @@ const Feeds = () => {
   const likemutation = Useuserlike();
 
   const [searchQuery, setSearchQuery] = useState("");
+  const [likes, setLikes] = useState<Record<string, number>>({});
+  const [dislikes, setDislikes] = useState<Record<string, number>>({});
+  const [userInteractions, setUserInteractions] = useState<Record<string, 'liked' | 'disliked' | undefined>>({});
+
   const context = useContext(DarkModeContext);
 
   if (context === null) {
@@ -34,6 +40,21 @@ const Feeds = () => {
   }
 
   const { darkMode } = context;
+
+  useEffect(() => {
+    if (Researchpapers) {
+      const initialLikes: Record<string, number> = {};
+      const initialDislikes: Record<string, number> = {};
+
+      Researchpapers.forEach((paper: ResearchPaperType) => {
+        initialLikes[paper._id] = paper.initialLikes;
+        initialDislikes[paper._id] = paper.initialDislikes;
+      });
+
+      setLikes(initialLikes);
+      setDislikes(initialDislikes);
+    }
+  }, [Researchpapers]);
 
   const filteredResearchPapers = Researchpapers?.filter((paper: ResearchPaperType) =>
     paper.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -54,13 +75,35 @@ const Feeds = () => {
     visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300 } },
   };
 
-  const handleLike = (likes: string) => {
-    likemutation.mutate(likes);
+  const handleLike = (id: string) => {
+    likemutation.mutate(id, {
+      onSuccess: (data) => {
+        setLikes((prevLikes) => ({
+          ...prevLikes,
+          [id]: data.totallikes,
+        }));
+        setUserInteractions((prevInteractions) => ({
+          ...prevInteractions,
+          [id]: 'liked',
+        }));
+      },
+    });
   };
 
-  const handleDislike = (dislike: string) => {
-    dislikemutation.mutate(dislike);
-  }
+  const handleDislike = (id: string) => {
+    dislikemutation.mutate(id, {
+      onSuccess: (data) => {
+        setDislikes((prevDislikes) => ({
+          ...prevDislikes,
+          [id]: data.totalduslikes,
+        }));
+        setUserInteractions((prevInteractions) => ({
+          ...prevInteractions,
+          [id]: 'disliked',
+        }));
+      },
+    });
+  };
 
   return (
     <>
@@ -129,11 +172,19 @@ const Feeds = () => {
                 View Research Paper
               </motion.a>
 
-              <div className="flex gap-4 mt-4">
-                <ThumbsUp className="cursor-pointer" color="#1877F2" onClick={() => handleLike(researchpaper._id)} />
-                <h1 className={`${darkMode ? "text-white" : ""}`}>{0}</h1>
-                <ThumbsDown className="cursor-pointer mt-1" color="#D9534F" onClick={() => handleDislike(researchpaper._id)} />
-                <h1 className={`${darkMode ? "text-white" : ""}`}>{0}</h1>
+              <div className="flex gap-4 mt-4 py-2 px-10">
+                <ThumbsUp
+                  className={`cursor-pointer ${userInteractions[researchpaper._id] === 'liked' ? 'text-blue-600' : ''}`}
+                  color="#1877F2"
+                  onClick={() => handleLike(researchpaper._id)}
+                />
+                <h1 className={`${darkMode ? "text-white" : ""}`}>{likes[researchpaper._id] ?? researchpaper.initialLikes}</h1>
+                <ThumbsDown
+                  className={`cursor-pointer mt-1 ${userInteractions[researchpaper._id] === 'disliked' ? 'text-red-600' : ''}`}
+                  color="#D9534F"
+                  onClick={() => handleDislike(researchpaper._id)}
+                />
+                <h1 className={`${darkMode ? "text-white" : ""}`}>{dislikes[researchpaper._id] ?? researchpaper.initialDislikes}</h1>
               </div>
             </motion.div>
           ))
