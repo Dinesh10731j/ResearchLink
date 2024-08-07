@@ -8,7 +8,7 @@ const { Userlikes } = endpoints;
 const Userlike = async (likeid:string) => {
     try{
         const userid = Cookies.get("userid");
-        const response = await axiosInstance.post(Userlikes, { dislike:likeid,userid:userid });
+        const response = await axiosInstance.post(Userlikes, {like:likeid,userid:userid });
         console.log(response.data.data);
         return response.data.data;
     }catch{
