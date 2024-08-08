@@ -158,7 +158,7 @@ const Feeds = () => {
                   />
                 ) : (
                   <img
-                    src="https://avatar.iran.liara.run/public"
+                  src={`https://avatar.iran.liara.run/username?username=${researchpaper.userId?.name}`}
                     alt="Default Profile"
                     className="h-20 w-20 rounded-full object-cover cursor-pointer"
                   />

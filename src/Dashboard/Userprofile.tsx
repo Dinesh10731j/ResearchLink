@@ -7,7 +7,7 @@ import {Link} from "react-router-dom"
 
 const Userprofile = () => {
   const { id } = useParams();
-  const { data: data, isLoading, isError } = UseUserProfile(id);
+  const { data:data, isLoading, isError } = UseUserProfile(id);
   const context = useContext(DarkModeContext);
   if (context === null) {
     throw new Error("DarkModeContext must be used within a DarkModeProvider");
@@ -28,7 +28,7 @@ const Userprofile = () => {
             />
           ) : (
             <img
-              src="https://avatar.iran.liara.run/public"
+              src={`https://avatar.iran.liara.run/username?username=${data?.name}`}
               className="h-40 w-40 rounded-full shadow-md"
             />
           )}

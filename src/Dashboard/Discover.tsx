@@ -33,7 +33,7 @@ user?.profilePicture?(
   <CardMedia
   component="img"
   height="120"
-  image='https://avatar.iran.liara.run/public'
+  image={`https://avatar.iran.liara.run/username?username=${user?.name}`}
   alt={user.name}
 />
 )
