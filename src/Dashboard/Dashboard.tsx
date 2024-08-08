@@ -49,7 +49,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className={`relative ${darkMode ? 'bg-[#2D2D2A]' : ''} min-h-screen transition-all`}>
+      <div className={`relative ${darkMode ? 'bg-[#2D2D2A]' : ''} min-h-screen `}>
         <div className="flex flex-col bg-none gap-3 md:flex-row">
           <MenuIcon
             color="#708090"
@@ -85,7 +85,7 @@ const Dashboard = () => {
                 <CircularProgress size={20} color="primary" />
               ) : isError ? (
                 <img
-                  src="https://avatar.iran.liara.run/public"
+                  src={`https://avatar.iran.liara.run/username?username=${data?.name}`}
                   className="h-20 w-20 rounded-full"
                 />
               ) : data?.profilePicture ? (
@@ -96,7 +96,7 @@ const Dashboard = () => {
                 />
               ) : (
                 <img
-                  src={user?.picture }
+                src={`https://avatar.iran.liara.run/username?username=${data?.name}`}
                   className="h-20 w-20 rounded-full"
                 />
               )}
