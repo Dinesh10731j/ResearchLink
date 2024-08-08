@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+
 const Header = () => {
   return (
-    <header className="flex justify-between items-center  shadow-xl py-3 md:py-5 px-10 md:px-36 font-serif ">
+    <header className="flex justify-between items-center shadow-xl py-3 md:py-5 px-10 md:px-36 font-serif ">
       <section>
         <motion.h1
           className="text-green-400 md:text-3xl  text-xl"
