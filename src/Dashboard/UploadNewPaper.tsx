@@ -15,7 +15,7 @@ interface FileUploadData {
 }
 
 const UploadNewPaper = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<FileUploadData>();
+  const { register, handleSubmit, formState: { errors },reset } = useForm<FileUploadData>();
   const context = useContext(DarkModeContext);
 
 if(context === null){
@@ -49,7 +49,8 @@ const {darkMode} = context
       }
     } catch (error) {
       toast.error('Failed to upload image. Please try again.');
-    }
+    };
+    reset();
   };
 
   return (

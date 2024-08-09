@@ -15,5 +15,5 @@ return response.data.data;
 
 
 export const UseGetRequest = ()=>{
-    return useQuery({queryKey:['getfriendrequest'],queryFn:Fetchfriendrequests})
+    return useQuery({queryKey:['getfriendrequest'],queryFn:Fetchfriendrequests,refetchInterval:1000,staleTime:1000})
 }
