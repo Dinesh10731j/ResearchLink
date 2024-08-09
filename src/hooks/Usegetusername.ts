@@ -1,18 +1,23 @@
-import Cookies from "js-cookie"
-import axiosInstance from "../Endpoints/axiosInstance"
+import Cookies from "js-cookie";
+import axiosInstance from "../Endpoints/axiosInstance";
 import { endpoints } from "../Endpoints/endpoints";
 import { useQuery } from "@tanstack/react-query";
-const {Userdetails} = endpoints
-const getusername = async () =>{
-    const userid = Cookies.get("userid")
-    
-    const response = await axiosInstance.get(`${Userdetails}/${userid}`);
+const { Userdetails } = endpoints;
+const getusername = async () => {
+  const userid = Cookies.get("userid");
 
-    return response.data.data;
-}
+  const response = await axiosInstance.get(`${Userdetails}/${userid}`);
 
+  return response.data.data;
+};
 
-
-export const UserUserdetails = ()=>{
-    return useQuery({queryKey:['userdetails'],queryFn:getusername});
-}
+export const UserUserdetails = () => {
+  return useQuery({
+    queryKey: ["userdetails"],
+    queryFn: getusername,
+    staleTime: 1000,
+    refetchInterval: 1000,
+    refetchOnWindowFocus: "always",
+    refetchOnMount: "always",
+  });
+};

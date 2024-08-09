@@ -18,5 +18,9 @@ export const UseGetResearchLinkUsers = () => {
   return useQuery({
     queryKey: ["researchlinkusers"],
     queryFn: FetchResearchLinkUsers,
+    refetchInterval:1000,
+    staleTime:1000,
+    refetchOnWindowFocus:'always',
+    refetchOnMount:'always'
   });
 };

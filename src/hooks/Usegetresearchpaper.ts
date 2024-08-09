@@ -8,5 +8,12 @@ const ResearchPapers = async () => {
 };
 
 export const UseResearchPaper = () => {
-  return useQuery({ queryKey: ["researchpapers"], queryFn: ResearchPapers,refetchOnWindowFocus:"always",refetchOnMount:"always" });
+  return useQuery({
+    queryKey: ["researchpapers"],
+    queryFn: ResearchPapers,
+    refetchOnWindowFocus: "always",
+    refetchOnMount: "always",
+    staleTime:1000,
+    refetchInterval:1000
+  });
 };
