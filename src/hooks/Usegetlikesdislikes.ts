@@ -8,7 +8,7 @@ const fetchgetLikesDislikes = async (paperId: string) => {
     const response = await axiosInstance.get(
       `${Getdislikesdislikes}/${paperId}`
     );
-    console.log('This is likes and dislikes',response.data.data);
+ 
     return response.data.data;
   } catch {
     throw new Error("Failed to fetch the likesdislikes");

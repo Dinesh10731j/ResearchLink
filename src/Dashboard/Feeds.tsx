@@ -24,13 +24,9 @@ interface ResearchPaperType {
 
 const Feeds = () => {
   const [likesdislikesid, setLikesDislikesid] = useState('');
-  console.log("This is likesdislikeid", likesdislikesid);
   const { data: Researchpapers, isLoading } = UseResearchPaper();
   const dislikemutation = Useuserdislike();
   const {data:likesdislikes} = UsegetLikesdislikes(likesdislikesid);
-
-  console.log("This is like and dislike id", likesdislikes?.data);
-
   const likemutation = Useuserlike();
 
   const [searchQuery, setSearchQuery] = useState("");
