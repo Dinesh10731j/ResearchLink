@@ -15,7 +15,7 @@
     "@mui/material": "^5.16.4",
     "@react-oauth/google": "^0.12.1",
     "@tanstack/react-query": "^5.51.11",
-    "axios": "^1.7.2",
+    "axios": "^1.7.4",
     "chart.js": "^4.4.3",
     "framer-motion": "^11.3.8",
     "js-base64": "^3.7.7",
