@@ -5,9 +5,11 @@ import Box from "@mui/material/Box";
 import { DarkModeContext } from "../context/DarkmodeContext";
 import { useContext, useState } from "react";
 import { ThumbsUp, ThumbsDown } from "lucide-react";
-import { Useuserdislike } from "../hooks/Usedislike";
-import { Useuserlike } from "../hooks/Uselike";
-import { UsegetLikesdislikes } from "../hooks/Usegetlikesdislikes";
+//import { Useuserdislike } from "../hooks/Usedislike";
+//import { Useuserlike } from "../hooks/Uselike";
+//import { UsegetLikesdislikes } from "../hooks/Usegetlikesdislikes";
+import { UseLikesDislikes } from "../hooks/Uselikesdislikes";
+
 
 interface ResearchPaperType {
   _id: string;
@@ -23,11 +25,13 @@ interface ResearchPaperType {
 }
 
 const Feeds = () => {
-  const [likesdislikesid, setLikesDislikesid] = useState('');
+ // const [likesdislikesid, setLikesDislikesid] = useState('');
   const { data: Researchpapers, isLoading } = UseResearchPaper();
-  const dislikemutation = Useuserdislike();
-  const {data:likesdislikes} = UsegetLikesdislikes(likesdislikesid);
-  const likemutation = Useuserlike();
+  //const dislikemutation = Useuserdislike();
+  //const {data:likesdislikes} = UsegetLikesdislikes(likesdislikesid);
+  //const likemutation = Useuserlike();
+
+  const likedislike = UseLikesDislikes();
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -63,15 +67,12 @@ const Feeds = () => {
     },
   };
 
-  const handleLike = (id: string) => {
-    likemutation.mutate(id);
-    setLikesDislikesid(id);
+  const handleLikeDislike = (id: string ) => {
+    likedislike.mutate(id);
+    //setLikesDislikesid(id);
   };
 
-  const handleDislike = (id: string) => {
-    dislikemutation.mutate(id);
-    setLikesDislikesid(id);
-  };
+  
 
   return (
     <>
@@ -161,15 +162,15 @@ const Feeds = () => {
                 <ThumbsUp
                   className={`cursor-pointer `}
                   color="#1877F2"
-                  onClick={() => handleLike(researchpaper._id)}
+                  onClick={() => handleLikeDislike(researchpaper._id)}
                 />
-                <h1 className={`${darkMode ? "text-white" : ""}`}>{likesdislikes?.totallikes}</h1>
+                <h1 className={`${darkMode ? "text-white" : ""}`}>{0}</h1>
                 <ThumbsDown
                   className={`cursor-pointer mt-1 `}
                   color="#D9534F"
-                  onClick={() => handleDislike(researchpaper._id)}
+                  onClick={() => handleLikeDislike(researchpaper._id)}
                 />
-                <h1 className={`${darkMode ? "text-white" : ""}`}>{likesdislikes?.totaldislikes}</h1>
+                <h1 className={`${darkMode ? "text-white" : ""}`}>{0}</h1>
               </div>
             </motion.div>
           ))
