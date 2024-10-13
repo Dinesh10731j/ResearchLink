@@ -3,12 +3,12 @@ import axiosInstance from "../Endpoints/axiosInstance";
 import { useMutation } from "@tanstack/react-query";
 import Cookies from "js-cookie";
 
-const { Userlikes } = endpoints;
+const { Likes } = endpoints;
 
 const Userlike = async (likeid:string) => {
     try{
         const userid = Cookies.get("userid");
-        const response = await axiosInstance.post(Userlikes, {like:likeid,userid:userid });
+        const response = await axiosInstance.post(Likes, {paperId:likeid,userId:userid });
   
         return response.data;
     }catch{

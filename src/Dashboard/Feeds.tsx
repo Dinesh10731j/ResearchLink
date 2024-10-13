@@ -7,7 +7,7 @@ import { useContext, useState } from "react";
 import { ThumbsUp, ThumbsDown } from "lucide-react";
 import { Useuserdislike } from "../hooks/Usedislike";
 import { Useuserlike } from "../hooks/Uselike";
-import { UsegetLikesdislikes } from "../hooks/Usegetlikesdislikes";
+import Cookies from "js-cookie";
 
 interface ResearchPaperType {
   _id: string;
@@ -20,14 +20,20 @@ interface ResearchPaperType {
     _id: string;
     profilePicture: string;
   };
+
+  dislikeCount:string,
+  likeCount:string,
 }
 
 const Feeds = () => {
-  const [likesdislikesid, setLikesDislikesid] = useState('');
+ // const [likesdislikesid, setLikesDislikesid] = useState('');
   const { data: Researchpapers, isLoading } = UseResearchPaper();
-  const dislikemutation = Useuserdislike();
-  const {data:likesdislikes} = UsegetLikesdislikes(likesdislikesid);
+  //const dislikemutation = Useuserdislike();
+  //const {data:likesdislikes} = UsegetLikesdislikes(likesdislikesid);
+  //const likemutation = Useuserlike();
+
   const likemutation = Useuserlike();
+  const dislikemutation = Useuserdislike();
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -62,16 +68,18 @@ const Feeds = () => {
       transition: { type: "spring", stiffness: 300 },
     },
   };
-
-  const handleLike = (id: string) => {
-    likemutation.mutate(id);
-    setLikesDislikesid(id);
+  const handleLike = (paperId: string) => {
+  
+    likemutation.mutate(paperId); 
+  };
+  
+  const handleDisLike = (paperId: string) => {
+   dislikemutation.mutate(paperId);
   };
 
-  const handleDislike = (id: string) => {
-    dislikemutation.mutate(id);
-    setLikesDislikesid(id);
-  };
+
+const userId: string = Cookies.get('userid') || '';
+
 
   return (
     <>
@@ -158,18 +166,19 @@ const Feeds = () => {
               </motion.a>
 
               <div className="flex gap-4 mt-4 py-2 px-10">
-                <ThumbsUp
-                  className={`cursor-pointer `}
-                  color="#1877F2"
-                  onClick={() => handleLike(researchpaper._id)}
-                />
-                <h1 className={`${darkMode ? "text-white" : ""}`}>{likesdislikes?.totallikes}</h1>
-                <ThumbsDown
-                  className={`cursor-pointer mt-1 `}
-                  color="#D9534F"
-                  onClick={() => handleDislike(researchpaper._id)}
-                />
-                <h1 className={`${darkMode ? "text-white" : ""}`}>{likesdislikes?.totaldislikes}</h1>
+              <ThumbsUp
+  className={`cursor-pointer ${researchpaper?.likeCount?.includes(userId) ? 'fill-blue-600' : ''}`}
+  color="#1877F2"
+  onClick={() => handleLike(researchpaper._id)}
+/>
+<h1 className={`${darkMode ? "text-white" : ""}`}>{researchpaper?.likeCount?.length}</h1>
+<ThumbsDown
+  className={`cursor-pointer mt-1 ${researchpaper?.dislikeCount?.includes(userId) ? 'fill-red-600' : ''}`}
+  color="#D9534F"
+  onClick={() =>handleDisLike(researchpaper._id)}
+/>
+
+                <h1 className={`${darkMode ? "text-white" : ""}`}>{researchpaper?.dislikeCount?.length}</h1>
               </div>
             </motion.div>
           ))

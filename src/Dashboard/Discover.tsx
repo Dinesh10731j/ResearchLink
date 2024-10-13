@@ -74,7 +74,7 @@ const Discover: React.FC = () => {
 
   
 
-  const sendRequest = (userid: any) => {
+  const sendRequest = (userid:any) => {
     sendRequestMutation.mutate(userid);
   };
 
