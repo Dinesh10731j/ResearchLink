@@ -21,16 +21,12 @@ interface ResearchPaperType {
     profilePicture: string;
   };
 
-  dislikeCount:string,
-  likeCount:string,
+  dislikeCount: string;
+  likeCount: string;
 }
 
 const Feeds = () => {
- // const [likesdislikesid, setLikesDislikesid] = useState('');
   const { data: Researchpapers, isLoading } = UseResearchPaper();
-  //const dislikemutation = Useuserdislike();
-  //const {data:likesdislikes} = UsegetLikesdislikes(likesdislikesid);
-  //const likemutation = Useuserlike();
 
   const likemutation = Useuserlike();
   const dislikemutation = Useuserdislike();
@@ -69,17 +65,14 @@ const Feeds = () => {
     },
   };
   const handleLike = (paperId: string) => {
-  
-    likemutation.mutate(paperId); 
+    likemutation.mutate(paperId);
   };
-  
+
   const handleDisLike = (paperId: string) => {
-   dislikemutation.mutate(paperId);
+    dislikemutation.mutate(paperId);
   };
 
-
-const userId: string = Cookies.get('userid') || '';
-
+  const userId: string = Cookies.get("userid") || "";
 
   return (
     <>
@@ -166,19 +159,31 @@ const userId: string = Cookies.get('userid') || '';
               </motion.a>
 
               <div className="flex gap-4 mt-4 py-2 px-10">
-              <ThumbsUp
-  className={`cursor-pointer ${researchpaper?.likeCount?.includes(userId) ? 'fill-blue-700' : ''}`}
-  color="#1877F2"
-  onClick={() => handleLike(researchpaper._id)}
-/>
-<h1 className={`${darkMode ? "text-white" : ""}`}>{researchpaper?.likeCount?.length}</h1>
-<ThumbsDown
-  className={`cursor-pointer mt-1 ${researchpaper?.dislikeCount?.includes(userId) ? 'fill-red-700' : ''}`}
-  color="#D9534F"
-  onClick={() =>handleDisLike(researchpaper._id)}
-/>
+                <ThumbsUp
+                  className={`cursor-pointer ${
+                    researchpaper?.likeCount?.includes(userId)
+                      ? "fill-blue-700"
+                      : ""
+                  }`}
+                  color="#1877F2"
+                  onClick={() => handleLike(researchpaper._id)}
+                />
+                <h1 className={`${darkMode ? "text-white" : ""}`}>
+                  {researchpaper?.likeCount?.length}
+                </h1>
+                <ThumbsDown
+                  className={`cursor-pointer mt-1 ${
+                    researchpaper?.dislikeCount?.includes(userId)
+                      ? "fill-red-700"
+                      : ""
+                  }`}
+                  color="#D9534F"
+                  onClick={() => handleDisLike(researchpaper._id)}
+                />
 
-                <h1 className={`${darkMode ? "text-white" : ""}`}>{researchpaper?.dislikeCount?.length}</h1>
+                <h1 className={`${darkMode ? "text-white" : ""}`}>
+                  {researchpaper?.dislikeCount?.length}
+                </h1>
               </div>
             </motion.div>
           ))
