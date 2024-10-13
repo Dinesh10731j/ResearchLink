@@ -11,8 +11,6 @@ export const endpoints = {
   Getuserprofile: "/api/user-profile",
   Useractivities: "/api/user-activities",
   Userstats: "/api/user-stats",
-  Userdislikes: "/api/dislikes",
-  Userlikes: "/api/likes",
-  Getdislikesdislikes: "/api/getlikesdislikes",
-  Likesdislikes:'/api/likes-dislikes'
+  Likes:'/api/likes',
+  Dislikes:'/api/dislikes'
 };
