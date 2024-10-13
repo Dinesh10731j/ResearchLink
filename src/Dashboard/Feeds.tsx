@@ -167,13 +167,13 @@ const userId: string = Cookies.get('userid') || '';
 
               <div className="flex gap-4 mt-4 py-2 px-10">
               <ThumbsUp
-  className={`cursor-pointer ${researchpaper?.likeCount?.includes(userId) ? 'fill-blue-600' : ''}`}
+  className={`cursor-pointer ${researchpaper?.likeCount?.includes(userId) ? 'fill-blue-700' : ''}`}
   color="#1877F2"
   onClick={() => handleLike(researchpaper._id)}
 />
 <h1 className={`${darkMode ? "text-white" : ""}`}>{researchpaper?.likeCount?.length}</h1>
 <ThumbsDown
-  className={`cursor-pointer mt-1 ${researchpaper?.dislikeCount?.includes(userId) ? 'fill-red-600' : ''}`}
+  className={`cursor-pointer mt-1 ${researchpaper?.dislikeCount?.includes(userId) ? 'fill-red-700' : ''}`}
   color="#D9534F"
   onClick={() =>handleDisLike(researchpaper._id)}
 />
