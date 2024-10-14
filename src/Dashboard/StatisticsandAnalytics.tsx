@@ -21,7 +21,7 @@ const StatisticsandAnalytics = () => {
   if (error) return <p>Error fetching data</p>;
 
   const labels = userstats.map((stat: any) => `${stat._id.year}/${stat._id.month}`); 
-  const data = userstats.map((stat: any) => stat.count);
+  const data = userstats.map((stat:any) => stat.count);
 
   const chartData = {
     labels,

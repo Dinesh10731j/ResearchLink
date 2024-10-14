@@ -49,7 +49,7 @@ const {darkMode} = context
       }
     } catch (error) {
       toast.error('Failed to upload image. Please try again.');
-    };
+    }
     reset();
   };
 
