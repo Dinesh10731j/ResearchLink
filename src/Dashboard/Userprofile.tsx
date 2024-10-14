@@ -3,7 +3,8 @@ import { UseUserProfile } from "../hooks/Usegetuserprofile";
 import { useParams } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { DarkModeContext } from "../context/DarkmodeContext";
-import {Link} from "react-router-dom"
+import {Link} from "react-router-dom";
+import {PlusCircle} from "lucide-react"
 
 const Userprofile = () => {
   const { id } = useParams();
@@ -68,9 +69,21 @@ const Userprofile = () => {
         </section>
 
 
-        <section>
-        <Link to="/dashboard/chat"><button className="py-2 px-12 bg-blue-500 text-white rounded-md shadow-md">Message</button></Link>  
-        </section>
+        <section className="flex flex-col md:flex-row items-center gap-6">
+  <Link to="/dashboard/chat">
+    <button className="py-2 px-6 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 transition duration-300">
+      Message
+    </button>
+  </Link>
+  
+  <section className="flex items-center gap-4">
+    <button className=" flex gap-2 py-2 px-4 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition duration-300">
+      Follow <PlusCircle className="w-6 h-6 text-gray-900 " />
+    </button>
+    
+  </section>
+</section>
+
       </section>
     </>
   );

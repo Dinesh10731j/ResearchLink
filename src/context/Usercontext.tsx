@@ -1,14 +1,14 @@
 import { createContext, useState, ReactNode } from 'react';
 
 interface UserContextType {
-  user:any;
-  setUser: React.Dispatch<React.SetStateAction<any>>;
+  user:string;
+  setUser: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const UserContext = createContext<UserContextType | null>(null);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<string>('');
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
