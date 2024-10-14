@@ -10,6 +10,24 @@ import { UserUserdetails } from "../hooks/Usegetusername";
 import { UseGetRequest } from "../hooks/UsegetfriendRequest";
 import { DarkModeContext } from "../context/DarkmodeContext";
 import { UserContext } from "../context/Usercontext";
+interface User {
+  _id: string;
+  name: string;
+  affiliation: string;
+  profile: string;
+  profilePicture?: string;
+}
+
+interface FriendRequest {
+  _id: string;
+  sender: User;
+  receiver: User;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+  name:string
+}
+
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -27,7 +45,7 @@ const Dashboard = () => {
   if (userContext === null) {
     throw new Error('UserContext must be used within a UserProvider');
   }
-  const { user } = userContext;
+  const {user} = userContext;
 
 
   const [shownotification, setShownotification] = useState(false);
@@ -104,7 +122,7 @@ const Dashboard = () => {
               {isLoading ? (
                 <CircularProgress size={20} color="primary" />
               ) : (
-                <h1 className="text-center text-white text-2xl">{`Hi, ${data?.name || user?.name}`}</h1>
+                <h1 className="text-center text-white text-2xl">{`Hi, ${data?.name}`|| user?.name}</h1>
               )}
 
               {isLoading ? (
@@ -150,7 +168,7 @@ const Dashboard = () => {
                 <CircularProgress size={20} color="primary" />
               ) : friendRequests?.length > 0 ? (
                 <ul>
-                  {friendRequests.map((request: any) => (
+                  {friendRequests.map((request:FriendRequest) => (
                     <li key={request._id} className="p-2 border-b border-gray-500">
                       <div className="text-white">
                         <p>
