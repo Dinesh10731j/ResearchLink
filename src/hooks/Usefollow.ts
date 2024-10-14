@@ -3,11 +3,10 @@ import axiosInstance from "../Endpoints/axiosInstance";
 import { endpoints } from "../Endpoints/endpoints";
 import Cookies from "js-cookie";
 const {Follow} = endpoints;
-const Follows = async (followerId:string)=>{
+const Follows = async (userId:string)=>{
     try{
-        const userId = Cookies.get('userid');
+        const followerId= Cookies.get('userid');
         const response = await axiosInstance.post(Follow,{followerId:followerId,userId:userId});
-console.log(response);
         return response.data;
 
     }catch{
