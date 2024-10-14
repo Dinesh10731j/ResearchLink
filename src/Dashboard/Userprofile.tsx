@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { DarkModeContext } from "../context/DarkmodeContext";
 import {Link} from "react-router-dom";
-import {PlusCircle,Check} from "lucide-react";
+import {PlusCircle,Check,UsersIcon} from "lucide-react";
 import { UseFollow } from "../hooks/Usefollow";
 import Cookies from "js-cookie";
 const Userprofile = () => {
@@ -76,7 +76,10 @@ const Userprofile = () => {
             <p>User field not found</p>
           )}
         </section>
-
+        <section className="text-white flex items-center gap-2">
+  <UsersIcon className="w-5 h-5" />
+  <span>Followers: {data?.followers.length}</span>
+</section>
 
         <section className="flex flex-col md:flex-row items-center gap-6">
   <Link to="/dashboard/chat">
