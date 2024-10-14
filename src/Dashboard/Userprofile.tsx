@@ -4,10 +4,12 @@ import { useParams } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { DarkModeContext } from "../context/DarkmodeContext";
 import {Link} from "react-router-dom";
-import {PlusCircle} from "lucide-react"
+import {PlusCircle} from "lucide-react";
+import { UseFollow } from "../hooks/Usefollow";
 
 const Userprofile = () => {
   const { id } = useParams();
+  const followmutation = UseFollow();
   const { data:data, isLoading, isError } = UseUserProfile(id);
   const context = useContext(DarkModeContext);
   if (context === null) {
@@ -15,6 +17,12 @@ const Userprofile = () => {
   }
 
   const { darkMode } = context;
+
+
+  const handleFollower = (userId:string)=>{
+   followmutation.mutate(userId);
+
+  }
 
   return (
     <>
@@ -77,7 +85,7 @@ const Userprofile = () => {
   </Link>
   
   <section className="flex items-center gap-4">
-    <button className=" flex gap-2 py-2 px-4 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition duration-300">
+    <button onClick={()=>handleFollower(data?._id)}  className=" flex gap-2 py-2 px-4 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition duration-300">
       Follow <PlusCircle className="w-6 h-6 text-gray-900 " />
     </button>
     
