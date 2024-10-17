@@ -13,5 +13,6 @@ export const endpoints = {
   Userstats: "/api/user-stats",
   Likes:'/api/likes',
   Dislikes:'/api/dislikes',
-  Follow:'/api/followers'
+  Follow:'/api/followers',
+  Deleteactivity:'/api/delete-activity',
 };
