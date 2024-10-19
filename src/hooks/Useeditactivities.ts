@@ -1,7 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import axiosInstance from "../Endpoints/axiosInstance";
 import { endpoints } from "../Endpoints/endpoints";
+import toast from "react-hot-toast";
 const {Editactivity} = endpoints;
+import { useNavigate } from "react-router-dom";
 interface RecentActivity {
     _id: string;
     title: string;
@@ -13,6 +15,8 @@ interface RecentActivity {
     updatedAt: string;
   }
 const editActivities = async (formData:RecentActivity)=>{
+
+
     try{
 
 
@@ -29,5 +33,12 @@ const editActivities = async (formData:RecentActivity)=>{
 
 
 export const UseEditActivity = ()=>{
-    return useMutation({mutationKey:['editactivity'],mutationFn:editActivities});
+    const navigate = useNavigate();
+    return useMutation({mutationKey:['editactivity'],mutationFn:editActivities,onSuccess:()=>{
+        toast.success('Activity edited successfully');
+       navigate('/dashboard/recent-activities')
+        
+    },onError:()=>{
+        toast.error('Failed! to edit activity');
+    }});
 }
