@@ -77,8 +77,8 @@ const Userprofile = () => {
           )}
         </section>
         <section className="text-white flex items-center gap-2">
-  <UsersIcon className="w-5 h-5" />
-  <span>Followers: {data?.followers.length}</span>
+  <UsersIcon className={`w-5 h-5 ${darkMode?'text-white':'text-black'}`}  />
+  <span className={`${darkMode?'text-white':'text-black'} `}>Followers: {data?.followers.length}</span>
 </section>
 
         <section className="flex flex-col md:flex-row items-center gap-6">

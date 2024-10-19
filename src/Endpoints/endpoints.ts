@@ -15,4 +15,5 @@ export const endpoints = {
   Dislikes:'/api/dislikes',
   Follow:'/api/followers',
   Deleteactivity:'/api/delete-activity',
+  Editactivity:'/api/edit-activity',
 };
