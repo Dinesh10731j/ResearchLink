@@ -20,6 +20,7 @@ ResearchLink is a dynamic platform designed for researchers to connect, share, a
 - **Responsive Design**: The platform is fully responsive, ensuring a seamless experience across all devices.
 - **Dark Mode**: Optional dark mode for a comfortable viewing experience.
 - **Follow**: A user can follow another user, which adds the followed user to their follower list and vice versa.
+- **Editactivities**:A user can edit their activities
 
 ## Technologies Used
 
