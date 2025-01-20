@@ -7,6 +7,7 @@ import { useContext, useState } from "react";
 import { ThumbsUp, ThumbsDown } from "lucide-react";
 import { Useuserdislike } from "../hooks/Usedislike";
 import { Useuserlike } from "../hooks/Uselike";
+
 import Cookies from "js-cookie";
 
 interface ResearchPaperType {
@@ -23,6 +24,7 @@ interface ResearchPaperType {
 
   dislikeCount: string;
   likeCount: string;
+  Views: number;
 }
 
 const Feeds = () => {
@@ -150,6 +152,7 @@ const Feeds = () => {
                   />
                 )}
               </motion.div>
+
               <motion.a
                 href={researchpaper.researchpaper}
                 variants={itemVariants}

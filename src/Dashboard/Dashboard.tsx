@@ -1,7 +1,7 @@
-import { Menu as MenuIcon, X, BellDot, MoonIcon, SunIcon } from "lucide-react";
-import { useState, useContext } from "react";
+import { Menu as MenuIcon, X, BellDot, MoonIcon, SunIcon} from "lucide-react";
+import { useState, useContext,useRef, useEffect } from "react";
 import { NavLinks } from "../utils/NavLinks";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
@@ -32,7 +32,7 @@ interface FriendRequest {
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(true);
   const context = useContext(DarkModeContext);
-
+const notificationRef = useRef<HTMLDivElement>(null);
   if (context === null) {
     throw new Error('DarkModeContext must be used within a DarkModeProvider');
   }
@@ -63,6 +63,23 @@ const Dashboard = () => {
     setShownotification(!shownotification);
   };
 
+
+
+  useEffect(()=>{
+    const handleClickOutside = (event:MouseEvent)=>{
+      if(notificationRef.current && !notificationRef.current.contains(event.target as Node)){
+        setShownotification(false);
+      }
+
+    };
+
+document.addEventListener("mousedown",handleClickOutside);
+return ()=>{
+  document.removeEventListener("mousedown",handleClickOutside);
+}
+
+  },[]);
+
   const userId = Cookies.get("userid");
 
   return (
@@ -91,9 +108,17 @@ const Dashboard = () => {
                     className="flex items-center p-4 hover:bg-black rounded-md transition-all"
                   >
                     <link.icon className="text-white mr-4" />
-                    <Link to={link.path} className="text-white">
-                      {link.title}
-                    </Link>
+                    <NavLink
+  to={link.path}
+  className={({ isActive }) =>
+    isActive
+      ? 'bg-black py-1 px-2 text-white rounded-md'
+      : 'text-gray-500 hover:bg-gray-200 py-1 px-2 rounded-md'
+  }
+>
+  {link.title}
+</NavLink>
+
                   </li>
                 ))}
               </ul>
@@ -159,9 +184,10 @@ const Dashboard = () => {
               <MoonIcon onClick={() => setDarkMode(!darkMode)} color={`${darkMode ? 'white' : 'black'}`} />
             )}
           </section>
-          <section className="fixed top-4 right-5">
+          <section className="fixed top-4 right-5" >
             <section
-              className={`h-[400px] w-[300px] shadow-md bg-[#2f2f2f] overflow-y-auto mt-10 rounded-md ${shownotification ? "block" : "hidden"
+            ref={notificationRef}
+              className={ `h-[400px] w-[300px] shadow-md bg-[#2f2f2f] overflow-y-auto mt-10 rounded-md ${shownotification ? "block" : "hidden"
                 }`}
             >
               {requestsLoading ? (
