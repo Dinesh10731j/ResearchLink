@@ -16,4 +16,5 @@ export const endpoints = {
   Follow:'/api/followers',
   Deleteactivity:'/api/delete-activity',
   Editactivity:'/api/edit-activity',
+  Countviews:"/api/views",
 };
